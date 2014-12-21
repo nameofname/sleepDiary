@@ -20,16 +20,24 @@ class Session {
     // Must in the passed options
     public $domain = null;
 
+    // Life span of the session cookie (6 months)
+    public $persist_time = 15870000;
+
+    // Boolean
+    public $secure = false;
+
     /**
      * Construct function grabs the CI instance, note that the DB is not connected here, called as needed.
      * @param $options <array>
      *      - $domain <string> - ***Required
      *      - $cookie_name <string> - the name of the cookie used to store the session token.
+     *      - $persist_time <number> - time in seconds to persist the cookie
+     *      - $secure <boolean> - https if true
      * @throws \ErrorException
      */
     function __construct($options) {
 
-        $option_names = array('cookie_name', 'domain');
+        $option_names = array('cookie_name', 'domain', 'persist_time', 'secure');
 
         // Assign each option to the top level
         foreach ($option_names as $o_name) {
@@ -61,23 +69,29 @@ class Session {
     }
 
     /**
-     * Sets the user session. This is used whenever the user logs in, or when we want to create a new user from scratch
+     * Sets the user session on the client machine.
+     * This is used whenever the user logs in, or when we want to create a new user from scratch.
      */
     public function create_session() {
-
         $new_sessid = $this->_generate_token();
-
-        // Create the cookie with the UID and the session ID.
-        $cookie_arr = array(
-            'name' => $this->cookie_name,
-            'value'	=> $new_sessid,
-            'expire' => '15870000', // 6 months.
-        );
-
-        // Set the session on the client machine.
-        $this->_set_session($cookie_arr);
-
+        $this->_set_session($new_sessid);
         return $new_sessid;
+    }
+
+    /**
+     * Helper function.
+     * Sets the session for the client:
+     * @param $cookie
+     * @return bool
+     */
+    private function _set_session($cookie) {
+        $expiration = mktime() + $this->persist_time;
+        $domain = $this->cookie_domain;
+
+        if (!setcookie($this->cookie_name, $cookie, $expiration, "/", $domain, $this->secure)) {
+            return false;
+        }
+        return $cookie;
     }
 
     /**
@@ -95,20 +109,25 @@ class Session {
         // Turn it into a hash
         $new_sessid = md5(uniqid($new_sessid, TRUE));
 
-        // To make the session ID even more secure we'll combine it with the user's IP
-        // TODO !!! REMOVE THE FOLLOWING SO I DON'T RELY ON CI AT ALL.
-        $new_sessid .= $this->CI->input->ip_address();
+        $ip = $this->_get_ip() || '';
+        $new_sessid .= $ip;
 
         return $new_sessid;
     }
 
     /**
-     * Helper function.
-     * Sets the session for the client:
-     * @param $cookie <string> - the cookie array.
+     * @private helper to get client IP address.
+     * @return mixed
      */
-    private function _set_session($cookie) {
-        $this->CI->input->set_cookie($cookie);
+    private function _get_ip () {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        } else {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        return $ip;
     }
 
 }
