@@ -10,7 +10,8 @@ class Page extends Auth_Controller {
 
     // An associative array of titles for each of the pages I maintain:
     public $titles = array(
-        'home' => "HOME!!!!"
+        'home' => "Home | Sleep Diary",
+        'not_found' => "Not found (404)"
     );
 
     public function __construct() {
@@ -45,33 +46,33 @@ class Page extends Auth_Controller {
     /**
      * Gets any page. I only have one route for serving pages and it's super simple.
      */
-    public function index($page) {
+    public function index($page=null) {
 
-//        $views_dir = APPPATH . 'views/';
-//
-//        // Check if the reuqested file exists. If not, throw up the 404 page.
-//        $page_file = 'pages/'.$page.'.php';
-//        $parent_page = 'parent.php';
-//
-//        if (file_exists($views_dir . $page_file)) {
-//
-//            if (!isset($this->titles[$page])) {
-//                throw new ErrorException('Page title is required to configure a new page.');
-//            }
-//            $this->data['title'] = $this->titles[$page];
-//            $this->data['page_file'] = $page_file;
-//            $this->load->view($parent_page, $this->data);
-//
-//        } else {
-//            $this->output->set_status_header('404');
-//            $this->data['title'] = $this->titles['not_found'];
-//            $this->data['page_file'] = 'pages/not_found.php';
-//            $this->load->view($parent_page, $this->data);
-//        }
+        $views_dir = APPPATH . 'views/';
 
-        // Comment this out to log to the requests table. For debugging purposes.
-        // $this->_log_request();
+        // Check if the reuqested file exists. If not, throw up the 404 page.
+        $page_file = 'pages/'.$page.'.php';
+        $parent_page = 'parent.php';
+
+        if (file_exists($views_dir . $page_file)) {
+
+            if (!isset($this->titles[$page])) {
+                throw new ErrorException('Page title is required to configure a new page.');
+            }
+            $this->data['title'] = $this->titles[$page];
+            $this->data['page_file'] = $page_file;
+            $this->load->view($parent_page, $this->data);
+
+        } else {
+            $this->output->set_status_header('404');
+            $this->data['title'] = $this->titles['not_found'];
+            $this->data['page_file'] = 'pages/not_found.php';
+            $this->load->view($parent_page, $this->data);
+        }
 	}
 
-}
+//    public function css ($file) {
+//        $this->load->view("css/$file");
+//    }
 
+}
