@@ -41,7 +41,7 @@ class Session {
 
         // Assign each option to the top level
         foreach ($option_names as $o_name) {
-            if ($options[$o_name]) {
+            if (isset($options[$o_name])) {
                 $this->cookie_name = $options[$o_name];
             }
         }

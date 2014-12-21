@@ -1,6 +1,7 @@
 <?php
 
-//use Libraries\Session
+//use Libraries\Session;
+use helpers\SessionInstance;
 require(APPPATH . 'core/Sleep_Controller.php');
 
 /**
@@ -24,7 +25,7 @@ class Auth_Controller extends Sleep_Controller {
 
 
 
-        $session = new Session();
+        $session = SessionInstance::getInstance();
         $this->session = $session->read_session();
 
         // If there is no session, then we know there is no user, set the user to null.
