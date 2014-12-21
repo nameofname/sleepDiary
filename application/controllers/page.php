@@ -14,7 +14,6 @@ class Page extends Auth_Controller {
     );
 
     public function __construct() {
-        die('bored now.');
         parent::__construct();
 
         // Next, attempt to create the user.

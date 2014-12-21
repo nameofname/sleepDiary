@@ -294,7 +294,7 @@ switch (ENVIRONMENT)
  */
 function __autoloader($class_name) {
     if (!strstr($class_name, 'CI_')) {
-        $file = APPPATH.str_replace('\\', '/', $class_name).EXT;
+        $file = APPPATH.str_replace('\\', '/', $class_name).'php';
         if (is_file($file)) {
             include_once($file);
             return true;
