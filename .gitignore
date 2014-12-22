@@ -16,5 +16,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /nbproject/
 .idea/*
 
-application/configs/configOverRides.php
-application/configs/database.php
+application/config/configOverRides.php
+application/config/database.php
