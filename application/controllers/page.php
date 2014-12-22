@@ -11,29 +11,12 @@ class Page extends Auth_Controller {
     // An associative array of titles for each of the pages I maintain:
     public $titles = array(
         'home' => "Home | Sleep Diary",
-        'diary' => "My Diary | Sleep Diary",
+        'my_diary' => "My Diary | Sleep Diary",
         'not_found' => "Not found (404)"
     );
 
     public function __construct() {
         parent::__construct();
-
-        // Next, attempt to create the user.
-//        if (!$this->curr_user) {
-//            // First if $this->user does not exist then load the model
-//            if (!isset($this->user)) {
-//                $this->user = new \Models\User();
-//            }
-//
-//            // Now create the token and the user.
-//            $token = $this->session->create_session();
-//            $this->curr_user = $this->user->create($token);
-//
-//        }
-//
-//        // Strip the PW out of the user sent to the client. Because that would be really stupid.
-//        unset($this->curr_user->pw);
-//        $this->data['user'] = $this->curr_user;
     }
 
     /**
@@ -41,13 +24,23 @@ class Page extends Auth_Controller {
      * function ever in here, so just do that.
      */
     public function home() {
-        return $this->index('home');
+        // If logged in already go to the my_diary page
+
+        // Serve up the home page.
+        return $this->_create_page('home');
+    }
+
+    public function my_diary() {
+        // if not logged in go to the home page
+
+        // Serve up the diary page.
+        return $this->_create_page('my_diary');
     }
 
     /**
      * Gets any page. I only have one route for serving pages and it's super simple.
      */
-    public function index($page=null) {
+    public function _create_page($page=null) {
 
         $views_dir = APPPATH . 'views/';
 
@@ -71,9 +64,5 @@ class Page extends Auth_Controller {
             $this->load->view($parent_page, $this->data);
         }
 	}
-
-//    public function css ($file) {
-//        $this->load->view("css/$file");
-//    }
 
 }

@@ -93,16 +93,10 @@ $route['404_override'] = '';
 $route['rest/'] = "rest/info";
 $route['rest/(:any)'] = "rest/request";
 
-// TODO ::: needed?
-//$route['login/(:any)'] = "login/$1";
+$route['home'] = "page/home";
+$route['my_diary'] = "page/my_diary";
 
-// CSS and JS
-//$route['css/(:any)'] = "page/css/$1";
-//$route['js/(:any)'] = "page/js/$1";
-
-$route['(:any)'] = "page/index/$1";
-
-$route[''] = "page/index";
+$route[''] = "page/home";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
