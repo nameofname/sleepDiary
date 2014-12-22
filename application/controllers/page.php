@@ -11,6 +11,7 @@ class Page extends Auth_Controller {
     // An associative array of titles for each of the pages I maintain:
     public $titles = array(
         'home' => "Home | Sleep Diary",
+        'diary' => "My Diary | Sleep Diary",
         'not_found' => "Not found (404)"
     );
 

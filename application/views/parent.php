@@ -31,15 +31,24 @@
 
 <?php //include('includes/footer.php') ?>
 
-<!--Include JS files! -->
-<?php //include('includes/common_js.php') ?>
-
 <?php
+// Now include all the JS :
+// Default JS is here.
+$default_js_files = array(
+    'https://code.jquery.com/jquery-2.1.3.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'
+);
+
 if (isset($js_files)) {
-    foreach ($js_files as $file) {
-        echo "<script type='text/javascript' src='$file'></script>";
-    }
+    array_merge($default_js_files, $js_files);
 }
+
+foreach ($default_js_files as $file) {
+    echo "<script type='text/javascript' src='$file'></script>";
+}
+
+
 ?>
 
 </body>
