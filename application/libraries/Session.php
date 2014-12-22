@@ -85,8 +85,8 @@ class Session {
      * @return bool
      */
     private function _set_session($cookie) {
-        $expiration = mktime() + $this->persist_time;
-        $domain = $this->cookie_domain;
+        $expiration = time() + $this->persist_time;
+        $domain = $this->domain;
 
         if (!setcookie($this->cookie_name, $cookie, $expiration, "/", $domain, $this->secure)) {
             return false;

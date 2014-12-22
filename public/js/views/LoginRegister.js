@@ -10,13 +10,15 @@
 
         template : _.template($('#LoginRegister-template').html(), null),
 
-        login : function () {
+        login : function (e) {
+            e.preventDefault();
             this.model.set(this._getData());
             this.model.url = '/login';
             this.model.save();
         },
 
-        register : function () {
+        register : function (e) {
+            e.preventDefault();
             this.model.set(this._getData());
             this.model.url = '/login/register';
             this.model.save();

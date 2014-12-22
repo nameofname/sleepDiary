@@ -2,6 +2,7 @@
 
 //use Libraries\Session;
 use helpers\SessionInstance;
+//use User_Model;
 require(APPPATH . 'core/Sleep_Controller.php');
 
 /**
@@ -18,13 +19,6 @@ class Auth_Controller extends Sleep_Controller {
     public function __construct () {
         parent::__construct();
 
-        // TODO !!!
-            // 1 - Get session
-            // 2 - get the user by session
-            // 3 - if not user then take a note
-
-
-
         $session = SessionInstance::getInstance();
         $this->session = $session->read_session();
 
@@ -34,8 +28,9 @@ class Auth_Controller extends Sleep_Controller {
 
             // Otherwise, get the user from the user model based on the session.
         } else {
-            $this->user = new \Models\User();
-            $this->curr_user = $this->user->by_session($this->session);
+            // TODO !!!!! if no token the user is null.
+            $this->load->model('User_Model');
+            $this->curr_user = $this->User_Model->by_session($this->session);
         }
     }
 

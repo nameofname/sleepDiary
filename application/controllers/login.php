@@ -14,23 +14,41 @@ require(__DIR__ . '/Auth_Controller.php');
 
 class Login extends Auth_Controller {
 
-    private $email;
-    private $pw;
-
     public function __construct() {
         parent::__construct();
+        $this->load->database();
+        $this->load->model('User_Model');
+    }
 
+    public function login () {
+        $data = $this->_get_data();
+        die(json_encode($data));
+    }
+
+    public function register () {
+        $data = $this->_get_data();
+        $new_user = $this->User_Model->create($data);
+        return $this->_send_output($new_user);
     }
 
     /**
      * Does the login. Uses the user model to check the credentials, then uses the session library to drop the cookie
      * and update the cookie in the DB if credentials pass.
      */
-    public function do_login () {
+    private function _do_login () {
 
     }
 
-    public function logout () {}
+//    public function logout () {}
+
+    private function _get_data () {
+        header('Content-type: application/json');
+        $data = json_decode(file_get_contents('php://input'),true);
+        return $data ? $data : null;
+    }
+
+    private function _send_output ($data) {
+        echo json_encode($data);
+    }
 
 }
-

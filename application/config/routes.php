@@ -93,6 +93,9 @@ $route['404_override'] = '';
 $route['rest/'] = "rest/info";
 $route['rest/(:any)'] = "rest/request";
 
+$route['login'] = "login/login";
+$route['login/(:any)'] = "login/$1";
+
 $route['home'] = "page/home";
 $route['my_diary'] = "page/my_diary";
 

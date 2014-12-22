@@ -26,13 +26,20 @@ class User_model extends CI_Model {
         $data = array_merge($data, $default);
         $this->db->insert('user', $data);
         $id = $this->db->insert_id();
-        $query = $this->db->query("Select * from user where id = $id");
+        $q = "Select * from user where id = $id";
+        $query = $this->db->query($q);
         return $query->row();
     }
 
     public function read ($data) {
         //
     }
+
+    public function by_session ($token) {
+        // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // return NULL if no user token. ? or do that in controller...
+    }
+
 
     public function update ($data) {
         //
@@ -45,7 +52,8 @@ class User_model extends CI_Model {
     private function _new_token () {
         $session = SessionInstance::getInstance();
         $token = $session->create_session();
-        $query = $this->db->query("Select * from user where token = $token");
+        $q = "Select * from user where token = '$token'";
+        $query = $this->db->query($q);
 
         while ($query->num_rows() > 0) {
             $token = $session->create_session();
