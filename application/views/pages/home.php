@@ -2,6 +2,7 @@
 $js_files = array(
     '/public/js/libraries/bbc/BaseView.js',
     '/public/js/views/LoginRegister.js',
+    '/public/js/models/User.js',
     '/public/js/pages/home.js'
 );
 
