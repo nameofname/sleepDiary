@@ -1,0 +1,3 @@
+[submodule "public/js/libraries/bbc"]
+	path = public/js/libraries/bbc
+	url = https://github.com/nameofname/Backbone.Components.git

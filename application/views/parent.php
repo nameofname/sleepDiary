@@ -12,11 +12,9 @@
 
 <div id="wrapper" class='container'>
 
-<!--    --><?php //include('includes/nav.php') ?>
-
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
+            <div id="JsContent" class="col-xs-12">
                 <?php include($page_file) ?>
             </div>
         </div>
@@ -24,7 +22,10 @@
 
 </div>
 
-<?php //include('includes/footer.php') ?>
+<!--Set up main app object : -->
+<script type='text/javascript'>
+    var app = {};
+</script>
 
 <?php
 // Now include all the JS :
@@ -35,14 +36,13 @@ $default_js_files = array(
     'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js'
 );
 
-die('ronald');
-die(var_dump($js_files));
-
 if (isset($js_files)) {
-    array_merge($default_js_files, $js_files);
+    $files = array_merge($default_js_files, $js_files);
+} else {
+    $files = $default_js_files;
 }
 
-foreach ($default_js_files as $file) {
+foreach ($files as $file) {
     echo "<script type='text/javascript' src='$file'></script>";
 }
 
