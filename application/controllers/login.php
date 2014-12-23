@@ -7,10 +7,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-// TODO !!!!!!! Add user model.
-//use Models\User;
-
 require(__DIR__ . '/Auth_Controller.php');
+use Helpers\SessionInstance;
 
 class Login extends Auth_Controller {
 
@@ -48,6 +46,11 @@ class Login extends Auth_Controller {
         }
 
         $new_user = $this->User_Model->create($data);
+
+        // Set the session on the client machine :
+        $s = SessionInstance::getInstance();
+        $s->set_session($new_user->token);
+
         return $this->_send_output($new_user);
     }
 

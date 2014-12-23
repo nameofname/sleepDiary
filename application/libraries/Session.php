@@ -74,19 +74,21 @@ class Session {
      */
     public function create_session() {
         $new_sessid = $this->_generate_token();
-        $this->_set_session($new_sessid);
         return $new_sessid;
     }
 
     /**
-     * Helper function.
      * Sets the session for the client:
      * @param $cookie
      * @return bool
      */
-    private function _set_session($cookie) {
+    public function set_session($cookie) {
         $expiration = time() + $this->persist_time;
         $domain = $this->domain;
+        $delete_time = time() - 3600;
+
+        // Delete the old cookie first :
+        setcookie($this->cookie_name, '', $delete_time, '/', $domain, $this->secure);
 
         if (!setcookie($this->cookie_name, $cookie, $expiration, "/", $domain, $this->secure)) {
             return false;
