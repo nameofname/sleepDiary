@@ -25,8 +25,28 @@ class Login extends Auth_Controller {
         die(json_encode($data));
     }
 
+    /**
+     * Register a new user. First check to see if an existing user with the same email exists :
+     */
     public function register () {
         $data = $this->_get_data();
+
+        if ($data === 'missing_data') {
+            $error = new stdClass();
+            $error->status = $data;
+            $error->message = 'An email address and a password are required to create an account.';
+            return $this->_send_output($error, 400);
+        }
+
+        $existing_user = $this->User_Model->by_email($data['email']);
+        if ($existing_user)
+        {
+            $error = new stdClass();
+            $error->status = 'existing_user';
+            $error->message = 'A user with this email already exists. Please try again with another email or login.';
+            return $this->_send_output($error, 400);
+        }
+
         $new_user = $this->User_Model->create($data);
         return $this->_send_output($new_user);
     }
@@ -44,11 +64,12 @@ class Login extends Auth_Controller {
     private function _get_data () {
         header('Content-type: application/json');
         $data = json_decode(file_get_contents('php://input'),true);
-        return $data ? $data : null;
-    }
 
-    private function _send_output ($data) {
-        echo json_encode($data);
+        if (empty($data['email']) || empty($data['password'])) {
+            return 'missing_data';
+        }
+
+        return $data ? $data : null;
     }
 
 }

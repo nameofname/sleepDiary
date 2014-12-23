@@ -31,8 +31,13 @@ class User_model extends CI_Model {
         return $query->row();
     }
 
-    public function read ($data) {
-        //
+//    public function read ($data) {
+//        //
+//    }
+
+    public function by_email ($email) {
+        $query = $this->db->query("Select * from user where email = '$email'");
+        return $query->row();
     }
 
     public function by_session ($token) {
