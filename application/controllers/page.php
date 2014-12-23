@@ -17,6 +17,7 @@ class Page extends Auth_Controller {
 
     public function __construct() {
         parent::__construct();
+//        $this->load->helper('url');
     }
 
     /**
@@ -24,7 +25,9 @@ class Page extends Auth_Controller {
      * function ever in here, so just do that.
      */
     public function home() {
-        // If logged in already go to the my_diary page
+        if ($this->curr_user) {
+            die(header('Location: /my_diary'));
+        }
 
         // Serve up the home page.
         return $this->_create_page('home');

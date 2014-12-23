@@ -19,6 +19,10 @@ class Auth_Controller extends Sleep_Controller {
     public function __construct () {
         parent::__construct();
 
+        // Load the DB class for all controllers under this one :
+        $this->load->database();
+
+        // Create a new instance of the Session class, then read the current session token (if there is one) :
         $session = SessionInstance::getInstance();
         $this->session = $session->read_session();
 
@@ -28,7 +32,6 @@ class Auth_Controller extends Sleep_Controller {
 
             // Otherwise, get the user from the user model based on the session.
         } else {
-            // TODO !!!!! if no token the user is null.
             $this->load->model('User_Model');
             $this->curr_user = $this->User_Model->by_session($this->session);
         }

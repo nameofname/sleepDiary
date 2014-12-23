@@ -14,22 +14,21 @@ class Login extends Auth_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->database();
         $this->load->model('User_Model');
         $this->session = SessionInstance::getInstance();
     }
 
+    /**
+     * Login is done over ajax (unsecure I know) and returns the user info on success.
+     */
     public function login () {
         $data = $this->_get_data();
-
         $existing_user = $this->User_Model->by_login($data);
-        if ($existing_user)
-        {
+
+        if ($existing_user) {
             // Set the session on the client machine :
             $this->session->set_session($existing_user->token);
-            $success = new stdClass();
-            $success->status = 'login_complete';
-            return $this->_send_output($success);
+            return $this->_send_output($existing_user);
 
         } else {
             $error = new stdClass();

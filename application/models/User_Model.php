@@ -44,8 +44,8 @@ class User_model extends CI_Model {
     }
 
     public function by_session ($token) {
-        // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // return NULL if no user token. ? or do that in controller...
+        $query = $this->db->query("Select * from user where token = '$token'");
+        return $query->row();
     }
 
 
