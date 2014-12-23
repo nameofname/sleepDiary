@@ -35,6 +35,9 @@ class Page extends Auth_Controller {
 
     public function my_diary() {
         // if not logged in go to the home page
+        if ($this->curr_user === null) {
+            die(header('Location: /home'));
+        }
 
         // Serve up the diary page.
         return $this->_create_page('my_diary');
