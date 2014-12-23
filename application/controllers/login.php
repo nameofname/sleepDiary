@@ -16,11 +16,27 @@ class Login extends Auth_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('User_Model');
+        $this->session = SessionInstance::getInstance();
     }
 
     public function login () {
         $data = $this->_get_data();
-        die(json_encode($data));
+
+        $existing_user = $this->User_Model->by_login($data);
+        if ($existing_user)
+        {
+            // Set the session on the client machine :
+            $this->session->set_session($existing_user->token);
+            $success = new stdClass();
+            $success->status = 'login_complete';
+            return $this->_send_output($success);
+
+        } else {
+            $error = new stdClass();
+            $error->status = 'login_failed';
+            $error->message = 'Your login failed. Please try again with different credentials.';
+            return $this->_send_output($error, 400);
+        }
     }
 
     /**
@@ -48,8 +64,7 @@ class Login extends Auth_Controller {
         $new_user = $this->User_Model->create($data);
 
         // Set the session on the client machine :
-        $s = SessionInstance::getInstance();
-        $s->set_session($new_user->token);
+        $this->session->set_session($new_user->token);
 
         return $this->_send_output($new_user);
     }
