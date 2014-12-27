@@ -100,7 +100,7 @@ class Session {
      */
     public function destroy_session () {
         $delete_time = time() - 3600;
-        setcookie($this->cookie_name, '', $delete_time, '/', $domain, $this->secure);
+        $success = setcookie($this->cookie_name, '', $delete_time, '/', $this->domain, $this->secure);
     }
 
     /**

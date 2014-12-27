@@ -76,7 +76,7 @@
             }
 
             var err = new BBC.AlertView({
-                type : 'error',
+                type : 'danger',
                 place : this.$('.error-container'),
                 message : error,
                 autoClose : false

@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
     <title><?= $title; ?></title>
-    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" />
+<!--    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap-responsive.css" />-->
     <link rel="stylesheet" type="text/css" href="/public/css/font-awesome/font-awesome.min.css" />
 
 </head>
 
 <body>
 
+<?php include(__DIR__ . '/header.php'); ?>
+
 <div id="wrapper" class='container'>
 
     <div class="container">
         <div class="row">
             <div id="JsContent" class="col-xs-12">
-                <?php include($page_file) ?>
+                <?php include($page_file); ?>
             </div>
         </div>
     </div>
