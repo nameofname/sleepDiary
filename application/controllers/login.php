@@ -26,8 +26,13 @@ class Login extends Auth_Controller {
         $existing_user = $this->User_Model->by_login($data);
 
         if ($existing_user) {
+            // Update the user's session token to a new (unused) token :
+            $new_token = $this->User_Model->get_unused_token();
+            $existing_user->token = $new_token;
+            $this->User_Model->update($existing_user);
+
             // Set the session on the client machine :
-            $this->session->set_session($existing_user->token);
+            $this->session->set_session($new_token);
             return $this->_send_output($existing_user);
 
         } else {
@@ -60,6 +65,7 @@ class Login extends Auth_Controller {
             return $this->_send_output($error, 400);
         }
 
+        // The use model "create" method will generate a user with a new (unused) token.
         $new_user = $this->User_Model->create($data);
 
         // Set the session on the client machine :
@@ -69,14 +75,16 @@ class Login extends Auth_Controller {
     }
 
     /**
-     * Does the login. Uses the user model to check the credentials, then uses the session library to drop the cookie
-     * and update the cookie in the DB if credentials pass.
+     * Logs the user out by deleting their session token and redirecting them to the login page.
      */
-    private function _do_login () {
+    public function logout () {
+        $this->load->helper('url');
 
+        // Set the session on the client machine :
+        $this->session->destroy_session();
+
+        redirect('/');
     }
-
-//    public function logout () {}
 
     private function _get_data () {
         header('Content-type: application/json');

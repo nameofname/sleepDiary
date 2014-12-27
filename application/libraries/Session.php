@@ -62,7 +62,7 @@ class Session {
     /**
      * Read the session cookie.
      */
-    public function read_session() {
+    public function read_session () {
         // TODO: DECRYPT THE COOKIE HERE SO THAT THE DATA IS SECURE!!!
         $session = $this->cookie;
         return $session;
@@ -82,18 +82,25 @@ class Session {
      * @param $cookie
      * @return bool
      */
-    public function set_session($cookie) {
+    public function set_session ($cookie) {
         $expiration = time() + $this->persist_time;
         $domain = $this->domain;
-        $delete_time = time() - 3600;
 
         // Delete the old cookie first :
-        setcookie($this->cookie_name, '', $delete_time, '/', $domain, $this->secure);
+        $this->destroy_session();
 
         if (!setcookie($this->cookie_name, $cookie, $expiration, "/", $domain, $this->secure)) {
             return false;
         }
         return $cookie;
+    }
+
+    /**
+     * Convenience method to delete a session cookie.
+     */
+    public function destroy_session () {
+        $delete_time = time() - 3600;
+        setcookie($this->cookie_name, '', $delete_time, '/', $domain, $this->secure);
     }
 
     /**
