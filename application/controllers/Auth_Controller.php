@@ -17,6 +17,7 @@ class Auth_Controller extends Sleep_Controller {
     public $session;
 
     public function __construct () {
+
         parent::__construct();
 
         // Load the DB class for all controllers under this one :
@@ -30,12 +31,10 @@ class Auth_Controller extends Sleep_Controller {
         if (!$this->session) {
             $this->curr_user = null;
 
-            // Otherwise, get the user from the user model based on the session.
+        // Otherwise, get the user from the user model based on the session.
         } else {
             $this->load->model('User_Model');
             $this->curr_user = $this->User_Model->by_session($this->session);
         }
     }
-
 }
-

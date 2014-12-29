@@ -14,11 +14,9 @@
 
 <div id="wrapper" class='container'>
 
-    <div class="container">
-        <div class="row">
-            <div id="JsContent" class="col-xs-12">
-                <?php include($page_file); ?>
-            </div>
+    <div class="row">
+        <div id="JsContent" class="col-xs-12">
+            <?php include($page_file); ?>
         </div>
     </div>
 

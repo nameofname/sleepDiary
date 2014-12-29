@@ -17,7 +17,6 @@ class Page extends Auth_Controller {
 
     public function __construct() {
         parent::__construct();
-//        $this->load->helper('url');
     }
 
     /**
@@ -59,6 +58,8 @@ class Page extends Auth_Controller {
             if (!isset($this->titles[$page])) {
                 throw new ErrorException('Page title is required to configure a new page.');
             }
+
+            $this->data['curr_user'] = $this->curr_user;
             $this->data['title'] = $this->titles[$page];
             $this->data['page_file'] = $page_file;
             $this->load->view($parent_page, $this->data);
