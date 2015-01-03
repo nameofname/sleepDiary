@@ -4,5 +4,8 @@
 
 <?php
 $js_files = array(
-    '/public/js/pages/diary.js'
+    '/public/js/libraries/bbc/BaseView.js',
+    '/public/js/models/User.js',
+    '/public/js/views/DiaryWrapperView.js',
+    '/public/js/pages/diary.js',
 );

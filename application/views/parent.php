@@ -25,6 +25,7 @@
 <!--Set up main app object : -->
 <script type='text/javascript'>
     var app = {};
+    app.currUserData = <?= json_encode($curr_user); ?>;
 </script>
 
 <?php
@@ -32,7 +33,6 @@
 // Default JS is here.
 $default_js_files = array(
     'https://code.jquery.com/jquery-2.1.3.min.js',
-//    'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.backbone.js',
     'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/backbone-associations/0.6.2/backbone-associations-min.js'
