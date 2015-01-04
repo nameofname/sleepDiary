@@ -7,8 +7,12 @@
 
     var user = new app.User(app.currUserData);
 
+    app.days = new app.Days();
+
     var d = new app.DiaryWrapperView({
         model : user
-    });
+    }).render();
+
+    $('#JsContent').append(d.$el);
 
 })();
