@@ -6,9 +6,9 @@
         template : _.template($('#DiaryWrapper-template').html(), null, {variable : 'data'}),
 
         initialize : function () {
-            this.subs.add('diary', new app.DiaryView({
+            this.subViews.add('diary', app.DiaryView, {
                 collection : app.days
-            }))
+            });
         }
 
     });

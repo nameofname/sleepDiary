@@ -1,8 +1,8 @@
 (function () {
     "use strict";
 
-    app.Days = new Backbone.Collection.extend({
-        url : '/soa/days',
+    app.Days = Backbone.Collection.extend({
+        url : '/rest/day',
         model : app.Day
     });
 

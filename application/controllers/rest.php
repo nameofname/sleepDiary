@@ -35,6 +35,8 @@ class Rest extends Auth_Controller {
     private $entity_id;
     // Related entity ID is the last segment in the URL for endpoints used to update/delete entity relationships
     private $related_entity_id;
+    // PUT or POST params :
+    public $put_post_params = null;
 
     public function __construct(){
         parent::__construct();
@@ -43,6 +45,13 @@ class Rest extends Auth_Controller {
         // If there are filters, AND the filters are not limit or offset, then set the filter_name value, this will
         // inform certain types of GET requests that a special query is required, not just a normal get() or get_one().
         $this->search_params = $_GET;
+
+        // Determine method type :
+        $this->method = $_SERVER['REQUEST_METHOD'];
+
+        // Get the put or post params :
+        $this->_get_put_post();
+
         if (count($this->search_params)) {
 
             // Make sure the limit and offset do not exceed the maximum.
@@ -311,5 +320,33 @@ class Rest extends Auth_Controller {
         return true;
     }
 
+    private function _get_put_post() {
+        // Get the PUT and POST parameters to pass to the model layer for data persistence requests.
+        if ($this->method == 'PUT') {
+
+            $params = json_decode(file_get_contents('php://input'));
+
+            // TODO : is this correct in all cases??????!!!!!!!!!!
+            if (!$params) {
+                $this->invalid_request('invalid_json');
+            } else {
+                $params = get_object_vars($params);
+            }
+
+            $this->put_post_params = $params;
+
+        } else if ($this->method == 'POST') {
+
+            $params = json_decode(file_get_contents('php://input'));
+
+            // Now assign the found params to $this->put_post_params
+            if ($params) {
+                $params = get_object_vars($params);
+                $this->put_post_params = $_POST ? $_POST : $params;
+            } else {
+                $this->put_post_params = null;
+            }
+        }
+    }
 }
 

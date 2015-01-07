@@ -9,6 +9,12 @@
 
     app.days = new app.Days();
 
+    app.days.fetch({
+        data : {
+            userId : user.get('id')
+        }
+    });
+
     var d = new app.DiaryWrapperView({
         model : user
     }).render();
