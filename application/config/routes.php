@@ -91,7 +91,7 @@ $route['default_controller'] = "page/home";
 $route['404_override'] = '';
 
 $route['rest/'] = "rest/info";
-$route['rest/(:any)'] = "rest/request";
+$route['rest/(:any)'] = "rest/index";
 
 $route['login'] = "login/login";
 $route['login/(:any)'] = "login/$1";
