@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+//namespace Models;
 
 //require(__DIR__ . '/../../system/core/Model.php');
 

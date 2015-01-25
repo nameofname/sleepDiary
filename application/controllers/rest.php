@@ -14,23 +14,34 @@ class Rest extends Auth_Controller {
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->_get_put_post();
+        $this->_get_search_params();
 
         parent::__construct();
     }
 
+    /**
+     * For each request do the following :
+     *      - Determine the model type from the URL
+     *      - Load the model with a little CI magic
+     *      - Determine the method type from the URL and the request type.
+     *      - Invoke the model method and die with the output.
+     */
     public function index () {
         $model = $this->get_model();
-        die(var_dump($model));
 
-
+        $this->load->model($model);
 
         $method = $this->method;
-        $res = $this->model->$method();
+
+        $data = ($this->method === 'get') ? $this->search_params : $this->put_post_params;
+
+        $res = $this->$model->$method($data);
+
         die(json_encode($res));
     }
 
     /**
-     * Gets the model name from the 2nd URL segment. 
+     * Gets the model name from the 2nd URL segment.
      * @return mixed
      */
     private function get_model () {
@@ -69,6 +80,9 @@ class Rest extends Auth_Controller {
         }
     }
 
+    private function _get_search_params() {
+        $this->search_params = $_GET;
+    }
 
 
 

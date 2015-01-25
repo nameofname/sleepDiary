@@ -18,7 +18,7 @@ class User_model extends CI_Model {
      * @param $data
      * @return mixed
      */
-    public function create ($data) {
+    public function post ($data) {
         $token = $this->get_unused_token();
         $default = array(
             'token' => $token

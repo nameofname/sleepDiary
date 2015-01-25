@@ -1,6 +1,7 @@
 <?php
 
-namespace Models;
+//namespace Models;
+require(__DIR__ . '/Base_Model.php');
 
 class Day extends Base_Model {
 
@@ -13,20 +14,19 @@ class Day extends Base_Model {
      * and the user id associated with the new row.
      * All sleep information will be set to the default of 'awake'
      */
-    public function create ($data) {
+    public function post ($data) {
         $insert_data = array(
-            'user_id' => $data->user_id
+            'user_id' => $data['user_id']
         );
 
         $this->db->insert('day', $insert_data);
         $id = $this->db->insert_id();
-        $q = "Select * from user where id = $id";
+        $q = "Select * from day where id = $id";
         $query = $this->db->query($q);
         return $query->row();
     }
 
     public function get () {
-
         if ($this->search_params->userId) {
             return $this->get_by_uid($this->search_params['userId']);
         }

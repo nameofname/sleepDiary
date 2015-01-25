@@ -65,8 +65,8 @@ class Login extends Auth_Controller {
             return $this->_send_output($error, 400);
         }
 
-        // The use model "create" method will generate a user with a new (unused) token.
-        $new_user = $this->User_Model->create($data);
+        // The use model "post" method will generate a user with a new (unused) token.
+        $new_user = $this->User_Model->post($data);
 
         // Set the session on the client machine :
         $this->session->set_session($new_user->token);
