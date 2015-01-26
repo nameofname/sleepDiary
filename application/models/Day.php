@@ -9,6 +9,12 @@ class Day extends Base_Model {
         parent::__construct();
     }
 
+    public function get ($data) {
+        if ($data['user_id']) {
+            return $this->get_by_uid($data['user_id']);
+        }
+    }
+
     /**
      * Create a new DAY model. Note that on create, no sleep time information is filled out, only the row is created
      * and the user id associated with the new row.
@@ -24,12 +30,6 @@ class Day extends Base_Model {
         $q = "Select * from day where id = $id";
         $query = $this->db->query($q);
         return $query->row();
-    }
-
-    public function get () {
-        if ($this->search_params->userId) {
-            return $this->get_by_uid($this->search_params['userId']);
-        }
     }
 
     private function get_by_uid ($id) {

@@ -4,8 +4,7 @@ use Helpers\SessionInstance;
 
 class User_model extends CI_Model {
 
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
     }
 
@@ -29,18 +28,6 @@ class User_model extends CI_Model {
         $q = "Select * from user where id = $id";
         $query = $this->db->query($q);
         return $query->row();
-
-
-
-
-        // TODO ::: USe the standard insert?
-        // TODO ::: Use db->escape on all inserted data.
-//        $sql = "INSERT INTO mytable (title, name)
-//        VALUES (".$this->db->escape($title).", ".$this->db->escape($name).")";
-//
-//        $this->db->query($sql);
-//
-//        echo $this->db->affected_rows();
     }
 
     public function by_id ($id) {

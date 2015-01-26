@@ -11,6 +11,18 @@
             "click #add" : 'addDay'
         },
 
+        render : function () {
+            var diaryView = new app.DiaryView({
+                collection : this.collection
+            }).render();
+
+            this.subViews.add(diaryView);
+
+            // TODO !!!!!!!
+            this.$('').append(diaryView.el);
+            return this;
+        },
+
         initialize : function () {
             this.subViews.add('diary', app.DiaryView, {
                 collection : app.days

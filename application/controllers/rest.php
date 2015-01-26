@@ -31,9 +31,9 @@ class Rest extends Auth_Controller {
 
         $this->load->model($model);
 
-        $method = $this->method;
+        $method = strtolower($this->method);
 
-        $data = ($this->method === 'get') ? $this->search_params : $this->put_post_params;
+        $data = ($method === 'get') ? $this->search_params : $this->put_post_params;
 
         $res = $this->$model->$method($data);
 

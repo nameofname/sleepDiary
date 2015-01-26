@@ -6,19 +6,29 @@
     }
 
     var user = new app.User(app.currUserData);
+    var dfd;
+    app.wrapper;
 
     app.days = new app.Days();
 
-    app.days.fetch({
+    dfd = app.days.fetch({
         data : {
-            userId : user.get('id')
+                user_id : user.get('id')
         }
     });
 
-    var d = new app.DiaryWrapperView({
-        model : user
-    }).render();
+    $.when(dfd)
+        .done(function () {
 
-    $('#JsContent').append(d.$el);
+            app.wrapper = new app.DiaryWrapperView({
+                model : user,
+                collection : app.days
+            }).render();
+
+            $('#JsContent').append(d.$el);
+        })
+        .fail(function () {
+            alert('its sooooo bad!');
+        });
 
 })();
