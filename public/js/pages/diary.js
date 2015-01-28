@@ -25,7 +25,7 @@
                 collection : app.days
             }).render();
 
-            $('#JsContent').append(d.$el);
+            $('#JsContent').append(app.wrapper.$el);
         })
         .fail(function () {
             alert('its sooooo bad!');

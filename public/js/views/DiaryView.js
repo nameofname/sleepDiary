@@ -5,11 +5,11 @@
 
         template : _.template($('#Diary-template').html(), null, {variable : 'data'}),
 
-        initialize : function () {
+        render : function () {
             var self = this;
 
             this.collection.each(function (dayModel) {
-                var newView = this.subViews.add(app.DiaryRowView, {
+                var newView = self.subViews.add(app.DiaryRowView, {
                     model : dayModel
                 });
 

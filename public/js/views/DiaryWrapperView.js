@@ -18,7 +18,6 @@
 
             this.subViews.add(diaryView);
 
-            // TODO !!!!!!!
             this.$('').append(diaryView.el);
             return this;
         },
