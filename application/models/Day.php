@@ -48,6 +48,8 @@ class Day extends Base_Model {
             $this->db->set($key, $val);
         }
 
+        $this->db->where('id', $id);
+
         $query = $this->db->update('day');
 
         if(!$query) {
