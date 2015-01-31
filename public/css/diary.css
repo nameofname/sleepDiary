@@ -1,4 +1,14 @@
 .time {
     float : left;
-    max-width: 40px;
+    max-width: 60px;
+}
+
+.time-hour.AWAKE {
+    background-color: green;
+}
+.time-hour.ASLEEP {
+    background-color: #ccc;
+}
+.time-hour.DOZING {
+    background-color: #efefef;
 }

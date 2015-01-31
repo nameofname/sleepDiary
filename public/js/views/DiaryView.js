@@ -30,6 +30,8 @@
             this.on('BaseView:render', function () {
                 this.renderTimes();
             });
+
+            this.on('changeSleepState', this.changeSleepState);
         },
 
         renderTimes : function () {
@@ -43,11 +45,16 @@
             });
         },
 
+        changeSleepState : function (time, state) {
+            this.model.set(time, state);
+            this.model.save();
+        },
+
         _addTime : function (val, key) {
             var timeView = this.subViews.add(app.DiaryTimeView, {
                 model : new Backbone.Model({
                     time : key,
-                    val : val
+                    state : val
                 })
             }).render();
 
@@ -61,7 +68,29 @@
 
 
     app.DiaryTimeView = BBC.BaseView.extend({
-        template : _.template($('#DiaryRowTime-template').html(), null, {variable : 'data'})
+
+        template : _.template($('#DiaryRowTime-template').html(), null, {variable : 'data'}),
+
+        events : {
+            'click' : 'toggleSleep'
+        },
+
+        toggleSleep : function (e) {
+            var self = this;
+            var states = ['ASLEEP', 'AWAKE', 'DOZING'];
+            var currState = this.model.get('state');
+            var newState = currState === 'AWAKE' ? 'ASLEEP' : 'AWAKE';
+
+            _.each(states, function (val) {
+                self.$('.time-hour').removeClass(val);
+            });
+
+            self.$('.time-hour').addClass(newState);
+
+            self.model.set('state', newState);
+
+            this.parentView.trigger('changeSleepState', this.model.get('time'), newState);
+        }
     });
 
 })();

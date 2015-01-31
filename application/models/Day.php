@@ -10,7 +10,9 @@ class Day extends Base_Model {
     }
 
     public function get ($data) {
-        if ($data['user_id']) {
+        if (isset($data['id'])) {
+            return $this->get_by_id($data['id']);
+        } elseif (isset($data['user_id'])) {
             return $this->get_by_uid($data['user_id']);
         }
     }
@@ -32,9 +34,37 @@ class Day extends Base_Model {
         return $query->row();
     }
 
+    public function put ($data) {
+        // Assert that the passed user data contains an ID (updates must be to existing records)
+        if (!$data['id']) {
+            throw new ErrorException('Cannot update a day record without and ID or token.');
+        }
+
+        // Update all the fields except ID :
+        $id = $data['id'];
+        unset($data['id']);
+
+        foreach ($data as $key=>$val) {
+            $this->db->set($key, $val);
+        }
+
+        $query = $this->db->update('day');
+
+        if(!$query) {
+            throw new ErrorException('Day model update failed.');
+        } else {
+            return $this->get_by_id($id);
+        }
+    }
+
     private function get_by_uid ($id) {
         $query = $this->db->query("Select * from day where user_id = '$id'");
         return $query->result_array();
+    }
+
+    private function get_by_id ($id) {
+        $query = $this->db->query("Select * from day where id = '$id'");
+        return $query->row();
     }
 
 }

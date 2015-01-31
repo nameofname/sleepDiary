@@ -21,6 +21,8 @@ fudge
 
 <script type="text/template" id="DiaryRowTime-template">
     <div class="time">
-        <%= data.time %> = <%= data.val %>
+        <div class="time-hour <%= data.state %>">
+            <%= data.time %>
+        </div>
     </div>
 </script>
