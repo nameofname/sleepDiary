@@ -41,10 +41,14 @@
 // Now include all the JS :
 // Default JS is here.
 $default_js_files = array(
-    'https://code.jquery.com/jquery-2.1.3.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/backbone-associations/0.6.2/backbone-associations-min.js'
+//    'https://code.jquery.com/jquery-2.1.3.min.js',
+//    'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js',
+//    'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js',
+//    'https://cdnjs.cloudflare.com/ajax/libs/backbone-associations/0.6.2/backbone-associations-min.js'
+    '/public/js/libraries/jquery-2.1.3.min.js',
+    '/public/js/libraries/underscore-min.js',
+    '/public/js/libraries/backbone-min.js',
+    '/public/js/libraries/backbone-associations-min.js'
 );
 
 if (isset($js_files)) {
