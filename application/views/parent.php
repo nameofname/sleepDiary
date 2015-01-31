@@ -5,6 +5,16 @@
     <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" />
 <!--    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap-responsive.css" />-->
     <link rel="stylesheet" type="text/css" href="/public/css/font-awesome/font-awesome.min.css" />
+    <?php include($page_file); ?>
+
+    <?php
+    // Include CSS files specified in page file :
+    if (isset($css_files)) {
+        foreach ($css_files as $file) {
+            echo "<link rel='stylesheet' type='text/css' href='$file' />";
+        }
+    }
+    ?>
 
 </head>
 
@@ -16,7 +26,6 @@
 
     <div class="row">
         <div id="JsContent" class="col-xs-12">
-            <?php include($page_file); ?>
         </div>
     </div>
 

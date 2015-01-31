@@ -12,13 +12,15 @@
         },
 
         render : function () {
-            var diaryView = new app.DiaryView({
+
+            // TODO ::: HERE add the add day view
+            // Add other views? What other views would there be?????? NOTHING!!!! MUA HA HA HA HA!
+
+            var diaryView = this.subViews.add(app.DiaryView, {
                 collection : this.collection
             }).render();
 
-            this.subViews.add(diaryView);
-
-            this.$('').append(diaryView.el);
+            this.$el.append(diaryView.el);
             return this;
         },
 

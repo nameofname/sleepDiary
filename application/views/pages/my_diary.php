@@ -9,4 +9,8 @@ $js_files = array(
     '/public/js/pages/diary.js',
 );
 
+$css_files = array(
+    '/public/css/diary.css',
+);
+
 include(__DIR__ . '/../html_templates/MyDiary.html');

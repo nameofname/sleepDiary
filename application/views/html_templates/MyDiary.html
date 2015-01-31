@@ -13,8 +13,14 @@ fudge
 
 <script type="text/template" id="DiaryRow-template">
     <div class="row">
-        <div id="XXXXXXXXXXXXX" class="col-xs-12">
-            This is the inside of this
+        <div class="col-xs-12">
+            <%= data.date %>
         </div>
+    </div>
+</script>
+
+<script type="text/template" id="DiaryRowTime-template">
+    <div class="time">
+        <%= data.time %> = <%= data.val %>
     </div>
 </script>
