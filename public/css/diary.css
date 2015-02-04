@@ -31,12 +31,18 @@
     user-select: none;
 }
 
+.diary-row div:nth-child(2) {
+    border-bottom : 0px;
+}
+
 .time-hour.AWAKE {
-    background-color: #F5F5F5;
+    /*background-color: #F5F5F5;*/
+    background-color: #F7F7F7;
 }
 .time-hour.ASLEEP {
     background-color: #D9EDF7;
 }
 .time-hour.DOZING {
-    background-color: #FCF8E3;
+    /*background-color: #FCF8E3;*/
+    background-color: #FCF6D4;
 }

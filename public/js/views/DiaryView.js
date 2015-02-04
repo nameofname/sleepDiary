@@ -34,6 +34,8 @@
 
     app.DiaryRowView = BBC.BaseView.extend({
 
+        className : 'diary-row',
+
         template : _.template($('#DiaryRow-template').html(), null, {variable : 'data'}),
 
         _currContainer : null,
@@ -80,7 +82,8 @@
 
             var timeView = this.subViews.add(app.DiaryTimeView, {
                 model : new Backbone.Model({
-                    time : time,
+                    displayTime : time,
+                    time : key,
                     state : val
                 })
             }).render();
