@@ -1,6 +1,16 @@
 (function () {
     "use strict";
 
+    // Globally (to this module) listen for mouse down so we can check later if the mouse is depressed :
+    var _down = false;
+    $(document).mousedown(function(e) {
+        _down = true;
+    }).mouseup(function(e) {
+        _down = false;
+    }).mouseleave(function(e) {
+        _down = false;
+    });
+
     app.DiaryView = BBC.BaseView.extend({
 
         template : _.template($('#Diary-template').html(), null, {variable : 'data'}),
@@ -59,7 +69,7 @@
 
             if (!this._currContainer || currLen === 48) {
                 this._currContainer = $('<div>').addClass('time-container');
-                this._currContainer.prepend($('<div>').addClass('pull-left').html(this._amPm));
+                this._currContainer.prepend($('<div>').addClass('time-ampm').html(this._amPm));
                 this._amPm = 'PM : ';
                 this.$el.append(this._currContainer);
             }
@@ -91,7 +101,18 @@
         template : _.template($('#DiaryRowTime-template').html(), null, {variable : 'data'}),
 
         events : {
-            'click' : 'toggleSleep'
+            'mousedown' : 'toggleSleep',
+            'mouseenter' : 'checkToggleSleep'
+        },
+
+        /**
+         * On mouse enter, check if the mouse is depressed. If so then toggle the sleep position :
+         * @param e
+         */
+        checkToggleSleep : function () {
+            if (_down) {
+                return this.toggleSleep();
+            }
         },
 
         toggleSleep : function (e) {
