@@ -101,7 +101,8 @@
         template : _.template($('#DiaryRowTime-template').html(), null, {variable : 'data'}),
 
         events : {
-            'mousedown' : 'toggleSleep',
+            //'click' : 'checkToggleDozing',
+            'mousedown' : 'checkToggleDozing',
             'mouseenter' : 'checkToggleSleep'
         },
 
@@ -116,18 +117,28 @@
         },
 
         toggleSleep : function (e) {
-            var self = this;
-            var states = ['ASLEEP', 'AWAKE', 'DOZING'];
             var currState = this.model.get('state');
             var newState = currState === 'AWAKE' ? 'ASLEEP' : 'AWAKE';
+            return this._setState(newState);
+        },
 
+        checkToggleDozing : function (e) {
+            if (e.shiftKey || e.ctrlKey) {
+                return this._setState('DOZING');
+            } else {
+                return this.toggleSleep();
+            }
+        },
+
+        _setState : function (newState) {
+            var states = ['ASLEEP', 'AWAKE', 'DOZING'];
             _.each(states, function (val) {
-                self.$('.time-hour').removeClass(val);
-            });
+                this.$('.time-hour').removeClass(val);
+            }, this);
 
-            self.$('.time-hour').addClass(newState);
+            this.$('.time-hour').addClass(newState);
 
-            self.model.set('state', newState);
+            this.model.set('state', newState);
 
             this.parentView.trigger('changeSleepState', this.model.get('time'), newState);
         }
