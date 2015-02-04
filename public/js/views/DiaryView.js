@@ -26,6 +26,9 @@
 
         template : _.template($('#DiaryRow-template').html(), null, {variable : 'data'}),
 
+        _currContainer : null,
+        _amPm : 'AM : ',
+
         initialize : function () {
             this.on('BaseView:render', function () {
                 this.renderTimes();
@@ -51,14 +54,28 @@
         },
 
         _addTime : function (val, key) {
+            var currLen = this.subViews.length;
+            var time = '';
+
+            if (!this._currContainer || currLen === 48) {
+                this._currContainer = $('<div>').addClass('time-container');
+                this._currContainer.prepend($('<div>').addClass('pull-left').html(this._amPm));
+                this._amPm = 'PM : ';
+                this.$el.append(this._currContainer);
+            }
+
+            if (currLen % 4 === 0) {
+                time = key.split(':')[0];
+            }
+
             var timeView = this.subViews.add(app.DiaryTimeView, {
                 model : new Backbone.Model({
-                    time : key,
+                    time : time,
                     state : val
                 })
             }).render();
 
-            this.$el.append(timeView.$el);
+            this._currContainer.append(timeView.$el);
         },
 
         _isTimeKey : function (str) {
@@ -68,6 +85,8 @@
 
 
     app.DiaryTimeView = BBC.BaseView.extend({
+
+        className : 'time',
 
         template : _.template($('#DiaryRowTime-template').html(), null, {variable : 'data'}),
 
