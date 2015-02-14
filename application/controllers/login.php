@@ -29,7 +29,7 @@ class Login extends Auth_Controller {
             // Update the user's session token to a new (unused) token :
             $new_token = $this->User_Model->get_unused_token();
             $existing_user->token = $new_token;
-            $this->User_Model->update($existing_user);
+            $this->User_Model->put($existing_user);
 
             // Set the session on the client machine :
             $this->session->set_session($new_token);

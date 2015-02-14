@@ -61,7 +61,7 @@ class User_model extends CI_Model {
      * @return mixed
      * @throws ErrorException
      */
-    public function update ($user_data) {
+    public function put ($user_data) {
         // Assert that the passed user data contains an ID (updates must be to existing records)
         if (!$user_data->id || !$user_data->token) {
             throw new ErrorException('Cannot update a user record without and ID or token.');
@@ -71,6 +71,13 @@ class User_model extends CI_Model {
         $this->db->set('name', $user_data->name);
         $this->db->set('password', $user_data->password);
         $this->db->set('token', $user_data->token);
+
+        // Restrict the update to one user model :
+        if ($user_data->id) {
+            $this->db->where('id', $user_data->id);
+        } else {
+            $this->db->where('token', $user_data->token);
+        }
 
         $query = $this->db->update('user');
 
