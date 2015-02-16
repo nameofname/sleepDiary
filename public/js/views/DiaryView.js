@@ -54,94 +54,99 @@
         },
 
         renderTimes : function () {
-            var json = this.model.toJSON();
-            var day = [];
-            var night = [];
-
-            // TODO ::: THIS LOGIC GETS ME THE VALUES OUT OF ORDER AND SLIGHTLY WRONG... FIX IT.
-
-            var morning = this._filterTimes(true, 8, 12);
-            var noon = this._filterTimes(false, 1, 8);
-            // TODO : !!!!!!!
+            var morning = this._filterTimes(true, 9, 11);
+            var noon = this._filterTimes(false, 12, 12);
+            var afternoon = this._filterTimes(false, 1, 8);
+            var evening = this._filterTimes(false, 9, 11);
+            var midnight = this._filterTimes(true, 12, 12);
+            var night = this._filterTimes(true, 1, 8);
 
             // First add the divider with the "Day" label
             // Next loop over the day values and add each cell :
             // Now add another divider with the "Night" label
             // Finally add each of the night cells :
-            this._addDivider('Day :');
+            this._addDivider('Day : : ');
 
-            _.each(day, function (time) {
-                this._addTime(this.model.get(time), time);
-            }, this);
+            this._addTimes(morning);
+            this._addTimes(noon);
+            this._addTimes(afternoon);
 
             this._addDivider('Night :');
 
-            _.each(night, function (time) {
-                this._addTime(this.model.get(time), time);
+            this._addTimes(evening);
+            this._addTimes(midnight);
+            this._addTimes(night);
+        },
+
+        /**
+         * Helper function to get times in a given range.
+         * Takes the upper bound, lower bound, and am boolean.
+         * @param am <bool>
+         * @param lowerBound <number>
+         * @param upperBound <number>
+         * @private
+         */
+        _filterTimes : function (am, lowerBound, upperBound) {
+            return _.filter(_.keys(this.model.toJSON()), function (timeKey) {
+                if (!this._isTimeKey(timeKey)) {
+                    return false;
+                }
+
+                var hour = parseInt(timeKey.split(':')[0], 10);
+                var isAm = timeKey.match(/[a-z]{2}/)[0] === 'am';
+                var inRange = ((lowerBound <= hour) && ( hour <= upperBound)) && (isAm === am);
+
+                return inRange;
+
             }, this);
-
         },
 
-        changeSleepState : function (time, state) {
-            this.model.set(time, state);
-            this.model.save();
-        },
-
+        /**
+         * Helper function to add a divider between the sub-views. Divides the rows into day / night.
+         * @param label
+         * @private
+         */
         _addDivider : function(label) {
             this._currContainer = $('<div>').addClass('time-container');
             this._currContainer.prepend($('<div>').addClass('time-ampm').html(label));
             this.$el.append(this._currContainer);
         },
 
-        _addTime : function (val, fullTime) {
-            var currLen = this.subViews.length;
-            var time = '';
-
-            if (currLen % 4 === 0) {
-                time = fullTime.split(':')[0];
-            }
-
-            var timeView = this.subViews.add(app.DiaryTimeView, {
-                model : new Backbone.Model({
-                    displayTime : time,
-                    time : fullTime,
-                    state : val
-                })
-            }).render();
-
-            this._currContainer.append(timeView.$el);
-        },
-
         /**
-         * TODO: Make this function take the upper, lower, and am distinction and apply .
-         * @param am
-         * @param lowerBound
-         * @param upperBound
+         * Helper function to add another time sub-views. Takes an array of times, for each 4 sub-views that are added
+         * this method adds a time marker to the view.
+         * @param timeArr
          * @private
          */
-        _filterTimes : function (am, lowerBound, upperBound) {
-            var json = this.model.toJSON();
-            _.each(json, function (val, timeKey) {
+        _addTimes : function (timeArr) {
+            _.each(timeArr, function (fullTime) {
 
-                if (this._isTimeKey(timeKey)) {
-                    var hour = parseInt(timeKey.split(':')[0], 10);
-                    var am = timeKey.match(/[a-z]{2}/)[0] === 'am';
-                    var morning = ((8 <= hour) && (hour <= 12)) && am;
-                    var noon = (hour === 12 || ((1 <= hour) && ( hour <= 8))) && !am;
+                var val = this.model.get(fullTime);
+                var currLen = this.subViews.length;
+                var hour = fullTime.split(':')[0];
 
-                    if (morning || noon) {
-                        day.push(timeKey);
-                    } else {
-                        night.push(timeKey);
-                    }
-                }
+                var timeView = this.subViews.add(app.DiaryTimeView, {
+                    model : new Backbone.Model({
+                        displayTime : (currLen % 4 === 0) ? hour : '',
+                        time : fullTime,
+                        state : val
+                    })
+                }).render();
+
+                this._currContainer.append(timeView.$el);
 
             }, this);
         },
 
         _isTimeKey : function (str) {
             return str.indexOf(':') !== -1;
+        },
+
+        changeSleepState : function (time, state) {
+            this.model.set(time, state);
+            this.model.save();
         }
+
     });
 
 
