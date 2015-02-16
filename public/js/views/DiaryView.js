@@ -65,17 +65,17 @@
             // Next loop over the day values and add each cell :
             // Now add another divider with the "Night" label
             // Finally add each of the night cells :
-            this._addDivider('Day : : ');
-
-            this._addTimes(morning);
-            this._addTimes(noon);
-            this._addTimes(afternoon);
-
             this._addDivider('Night :');
 
             this._addTimes(evening);
             this._addTimes(midnight);
             this._addTimes(night);
+
+            this._addDivider('Day : : ');
+
+            this._addTimes(morning);
+            this._addTimes(noon);
+            this._addTimes(afternoon);
         },
 
         /**
