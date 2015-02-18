@@ -24,10 +24,12 @@ class Day extends Base_Model {
      */
     public function post ($data) {
         $insert_data = array(
-            'user_id' => $data['user_id']
+            'user_id' => $data['user_id'],
+            'date' => $data['date']
         );
 
         $this->db->insert('day', $insert_data);
+
         $id = $this->db->insert_id();
         $q = "Select * from day where id = $id";
         $query = $this->db->query($q);
@@ -69,4 +71,17 @@ class Day extends Base_Model {
         return $query->row();
     }
 
+    /**
+     * Private method to validate a new Day posting. 2 Days of the same date cannot be created for the same user :
+     * @param $data
+     * @return int
+     */
+    public function find_duplicates ($data) {
+        $id = $data['user_id'];
+        $date = $data['date'];
+        $str = "Select * from day where user_id = '$id' and date = '$date'";
+        $query = $this->db->query($str);
+
+        return count($query->result_array());
+    }
 }
