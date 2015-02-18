@@ -22,6 +22,9 @@
 
             this.$el.append(this.template());
             this.$('#diary').append(diaryView.el);
+
+            this._initDatePicker();
+
             return this;
         },
 
@@ -31,14 +34,26 @@
             });
         },
 
-        addDay : function () {
+        _initDatePicker : function () {
+            this.$('.datepicker').datepicker()
+                .on('changeDate', function () {
+                    var date  = this.$('.datepicker').data('date');
+                    this.addDay(date);
+                }.bind(this));
+        },
+
+        /**
+         * Adds a new Day record, with the given date.
+         * @param date
+         */
+        addDay : function (date) {
             var dfd;
             var day = new app.Day({
-                user_id : user.get('id')
+                user_id : user.get('id'),
+                date : date
             });
             dfd = day.save();
             $.when(dfd).done(function () {
-                debugger;
                 this.render();
             }.bind(this));
         }

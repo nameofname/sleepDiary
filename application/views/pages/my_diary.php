@@ -1,6 +1,7 @@
 <?php
 $js_files = array(
     '/public/js/libraries/bbc/BaseView.js',
+    '/public/js/libraries/bootstrap-datepicker.js',
     '/public/js/models/User.js',
     '/public/js/models/Day.js',
     '/public/js/collections/Days.js',
@@ -11,6 +12,7 @@ $js_files = array(
 
 $css_files = array(
     '/public/css/diary.css',
+    '/public/css/datepicker.css',
 );
 
 include(__DIR__ . '/../html_templates/MyDiary.html');
