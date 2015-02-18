@@ -13,14 +13,15 @@
 
         render : function () {
 
-            // TODO ::: HERE add the add day view
-            // Add other views? What other views would there be?????? NOTHING!!!! MUA HA HA HA HA!
+            this.subViews.empty();
+            this.$el.empty();
 
             var diaryView = this.subViews.add(app.DiaryView, {
                 collection : this.collection
             }).render();
 
-            this.$el.append(diaryView.el);
+            this.$el.append(this.template());
+            this.$('#diary').append(diaryView.el);
             return this;
         },
 
@@ -31,15 +32,15 @@
         },
 
         addDay : function () {
-            var self = this;
             var dfd;
             var day = new app.Day({
                 user_id : user.get('id')
             });
             dfd = day.save();
             $.when(dfd).done(function () {
-                self.render();
-            });
+                debugger;
+                this.render();
+            }.bind(this));
         }
 
     });

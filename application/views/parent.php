@@ -31,6 +31,8 @@
 
 </div>
 
+<?php include(__DIR__ . '/footer.php'); ?>
+
 <!--Set up main app object : -->
 <script type='text/javascript'>
     var app = {};
