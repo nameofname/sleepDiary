@@ -39,7 +39,6 @@ class Rest extends Auth_Controller {
 
         $data = ($method === 'get') ? $this->search_params : $this->put_post_params;
 
-        return $this->_send_output('no_access_allowed', 403);
         if (!$method || !property_exists($this, $model)) {
             return $this->_send_output('no_access_allowed', 403);
         }
