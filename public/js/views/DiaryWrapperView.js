@@ -7,10 +7,6 @@
 
         template : _.template($('#DiaryWrapper-template').html(), null, {variable : 'data'}),
 
-        events : {
-            "click #add" : 'addDay'
-        },
-
         render : function () {
 
             this.subViews.empty();
