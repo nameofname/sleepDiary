@@ -1,6 +1,7 @@
 <?php
 $js_files = array(
     '/public/js/libraries/bbc/BaseView.js',
+    '/public/js/libraries/bbc/modules/AlertView.js',
     '/public/js/libraries/bootstrap-datepicker.js',
     '/public/js/models/User.js',
     '/public/js/models/Day.js',
@@ -16,3 +17,4 @@ $css_files = array(
 );
 
 include(__DIR__ . '/../html_templates/MyDiary.html');
+include(__DIR__ . '/../../../public/js/libraries/bbc/html/modal-alert.html');
