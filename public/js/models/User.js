@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    app.User = Backbone.AssociatedModel.extend({
+    app.User = app.BaseModel.extend({
         url : '/login'
     });
 

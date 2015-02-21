@@ -71,12 +71,20 @@ class Day extends Base_Model {
         return $query->row();
     }
 
+    public function validate_put ($data) {
+        $has_duplicates = $this->_find_duplicates($data);
+        if ($has_duplicates) {
+            return 'cannot_create_duplicates';
+        }
+        return true;
+    }
+
     /**
      * Private method to validate a new Day posting. 2 Days of the same date cannot be created for the same user :
      * @param $data
      * @return int
      */
-    public function find_duplicates ($data) {
+    private function _find_duplicates ($data) {
         $id = $data['user_id'];
         $date = $data['date'];
         $str = "Select * from day where user_id = '$id' and date = '$date'";

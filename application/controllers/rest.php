@@ -24,20 +24,43 @@ class Rest extends Auth_Controller {
      *      - Determine the model type from the URL
      *      - Load the model with a little CI magic
      *      - Determine the method type from the URL and the request type.
+     *      - Check for a validation method of the name "validate_METHOD" (ie. validate_put or validate_get)
+     *          - return error on failed validity check.
      *      - Invoke the model method and die with the output.
      */
     public function index () {
         $model = $this->get_model();
 
-        $this->load->model($model);
+        if ($model) {
+            $this->load->model($model);
+        }
 
         $method = strtolower($this->method);
 
         $data = ($method === 'get') ? $this->search_params : $this->put_post_params;
 
+        if (!$method || !property_exists($this, $model)) {
+            return $this->_send_output('no_access_allowed', 403);
+        }
+
+        if (!property_exists($this, $model)) {
+            return;
+        }
+
+        $has_validate_method = method_exists($this->$model, 'validate_' . $method);
+
+        if ($has_validate_method) {
+            $validation_method = 'validate_' . $method;
+            $validation = $this->$validation_method();
+            if ($validation !== true) {
+                return $this->_send_output($validation, 403);
+            }
+        }
+
         $res = $this->$model->$method($data);
 
-        die(json_encode($res));
+//        die(json_encode($res));
+        return $this->_send_output($res);
     }
 
     /**
@@ -45,7 +68,11 @@ class Rest extends Auth_Controller {
      * @return mixed
      */
     private function get_model () {
-        return $this->uri->segments[2];
+        return isset($this->uri->segments[2]) ? $this->uri->segments[2] : null;
+    }
+
+    public function info () {
+        die('nerp a derp!');
     }
 
     /**

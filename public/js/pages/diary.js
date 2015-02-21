@@ -13,14 +13,14 @@
 
     dfd = app.days.fetch({
         data : {
-                user_id : user.get('id')
+            user_id : user.get('id')
         }
     });
 
     $.when(dfd)
         .done(function () {
 
-            app.wrapper = new app.DiaryWrapperView({
+                app.wrapper = new app.DiaryWrapperView({
                 model : user,
                 collection : app.days
             }).render();
@@ -28,6 +28,10 @@
             $('#JsContent').append(app.wrapper.$el);
         })
         .fail(function () {
+            // TODO !!!!!!!!!!!!!!!!!!!!!!! .... please remove this.
+            // TODO !!!!!!!!!!!!!!!!!!!!!!! .... please remove this.
+            // TODO !!!!!!!!!!!!!!!!!!!!!!! .... please remove this.
+            // TODO !!!!!!!!!!!!!!!!!!!!!!! .... please remove this.
             alert('its sooooo bad!');
         });
 

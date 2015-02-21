@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    app.Day = Backbone.Model.extend({
+    app.Day = app.BaseModel.extend({
         url : '/rest/day'
     });
 
