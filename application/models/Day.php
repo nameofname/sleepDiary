@@ -42,9 +42,11 @@ class Day extends Base_Model {
             throw new ErrorException('Cannot update a day record without and ID or token.');
         }
 
-        // Update all the fields except ID :
+        // Update all the fields except ID, the user_id, and the date.:
         $id = $data['id'];
         unset($data['id']);
+        unset($data['date']);
+        unset($data['user_id']);
 
         foreach ($data as $key=>$val) {
             $this->db->set($key, $val);
@@ -62,16 +64,16 @@ class Day extends Base_Model {
     }
 
     private function get_by_uid ($id) {
-        $query = $this->db->query("Select * from day where user_id = '$id'");
+        $query = $this->db->query("Select * from day where user_id = '$id' order by date desc");
         return $query->result_array();
     }
 
     private function get_by_id ($id) {
-        $query = $this->db->query("Select * from day where id = '$id'");
+        $query = $this->db->query("Select * from day where id = '$id' order by date desc");
         return $query->row();
     }
 
-    public function validate_put ($data) {
+    public function validate_post ($data) {
         $has_duplicates = $this->_find_duplicates($data);
         if ($has_duplicates) {
             return 'cannot_create_duplicates';

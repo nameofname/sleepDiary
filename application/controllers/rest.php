@@ -51,7 +51,7 @@ class Rest extends Auth_Controller {
 
         if ($has_validate_method) {
             $validation_method = 'validate_' . $method;
-            $validation = $this->$validation_method();
+            $validation = $this->$model->$validation_method($data);
             if ($validation !== true) {
                 return $this->_send_output($validation, 403);
             }
