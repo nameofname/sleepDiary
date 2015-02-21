@@ -23,7 +23,7 @@
                     model : dayModel
                 }).render();
 
-                    self.$el.append(newView.$el);
+                self.$el.append(newView.$el);
             });
 
             return this;
@@ -46,25 +46,29 @@
         _amPm : 'AM : ',
 
         initialize : function () {
-            this.on('BaseView:render', function () {
-                this.renderTimes();
-            });
-
             this.on('changeSleepState', this.changeSleepState);
         },
 
+        render : function () {
+            this.$el.html(this.template(this.model.toJSON()));
+            this.renderTimes();
+            return this;
+        },
+
         renderTimes : function () {
-            var morning = this._filterTimes(true, 9, 11);
-            var noon = this._filterTimes(false, 12, 12);
-            var afternoon = this._filterTimes(false, 1, 8);
-            var evening = this._filterTimes(false, 9, 11);
-            var midnight = this._filterTimes(true, 12, 12);
-            var night = this._filterTimes(true, 1, 8);
+            console.log(1, new Date().getSeconds(), new Date().getMilliseconds());
+            var morning = this._getTimeRange(true, 9, 11);
+            var noon = this._getTimeRange(false, 12, 12);
+            var afternoon = this._getTimeRange(false, 1, 8);
+            var evening = this._getTimeRange(false, 9, 11);
+            var midnight = this._getTimeRange(true, 12, 12);
+            var night = this._getTimeRange(true, 1, 8);
 
             // First add the divider with the "Day" label
             // Next loop over the day values and add each cell :
             // Now add another divider with the "Night" label
             // Finally add each of the night cells :
+            console.log(2, new Date().getSeconds(), new Date().getMilliseconds());
             this._addDivider('Night :');
 
             this._addTimes(evening);
@@ -76,6 +80,28 @@
             this._addTimes(morning);
             this._addTimes(noon);
             this._addTimes(afternoon);
+            console.log(3, new Date().getSeconds(), new Date().getMilliseconds());
+        },
+
+        /**
+         * Helper function to get keys in a given time range.
+         * @param am
+         * @param lowerBound
+         * @param upperBound
+         * @returns {Array}
+         * @private
+         */
+        _getTimeRange : function (am, lowerBound, upperBound) {
+
+            var out = [];
+            for (var i=lowerBound; i<=upperBound; i++) {
+                for (var j=0; j<=3; j++) {
+                    var mins = j * 15;
+                    mins = mins == 0 ? '00' : mins;
+                    out.push(i + ':' + mins + (am ? 'am' : 'pm'));
+                }
+            }
+            return out;
         },
 
         /**

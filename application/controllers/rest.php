@@ -59,7 +59,6 @@ class Rest extends Auth_Controller {
 
         $res = $this->$model->$method($data);
 
-//        die(json_encode($res));
         return $this->_send_output($res);
     }
 
