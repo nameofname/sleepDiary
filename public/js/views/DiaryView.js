@@ -42,6 +42,7 @@
 
         template : _.template($('#DiaryRow-template').html(), null, {variable : 'data'}),
 
+        _timeout : null,
         _currContainer : null,
         _amPm : 'AM : ',
 
@@ -168,9 +169,18 @@
             return str.indexOf(':') !== -1;
         },
 
+        /**
+         * Saves the day model with the udpated sleep state. Waits for a timeout in case the user is multi-selecting
+         * many sleep "squares"
+         * @param time
+         * @param state
+         */
         changeSleepState : function (time, state) {
             this.model.set(time, state);
-            this.model.save();
+            clearTimeout(this._timeout);
+            this._timeout = setTimeout(function () {
+                this.model.save();
+            }.bind(this), 300);
         }
 
     });
