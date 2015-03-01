@@ -20,7 +20,7 @@
 
 <body>
 
-<?php include(__DIR__ . '/header.php'); ?>
+<?php include(dirname(__FILE__) . '/header.php'); ?>
 
 <div id="wrapper" class='container'>
 
@@ -31,7 +31,7 @@
 
 </div>
 
-<?php include(__DIR__ . '/footer.php'); ?>
+<?php include(dirname(__FILE__) . '/footer.php'); ?>
 
 <!--Set up main app object : -->
 <script type='text/javascript'>

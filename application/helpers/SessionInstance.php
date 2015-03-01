@@ -2,8 +2,8 @@
 
 namespace Helpers;
 
-use Libraries\Session;
-use Helpers\Config;
+use libraries\Session;
+use helpers\Config;
 
 class SessionInstance {
     /**

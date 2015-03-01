@@ -8,5 +8,5 @@ $js_files = array(
 );
 
 // Include html templates :
-include(__DIR__ . '/../html_templates/LoginRegister.html');
-include(__DIR__ . '/../../../public/js/libraries/bbc/html/modal-alert.html');
+include(dirname(__FILE__) . '/../html_templates/LoginRegister.html');
+include(dirname(__FILE__) . '/../../../public/js/libraries/bbc/html/modal-alert.html');

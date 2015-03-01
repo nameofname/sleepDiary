@@ -1,7 +1,7 @@
 <?php
 
 // TODO: use auto-loading!!!
-require(__DIR__ . '/Auth_Controller.php');
+require(dirname(__FILE__). '/Auth_Controller.php');
 
 class Page extends Auth_Controller {
 

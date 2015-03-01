@@ -16,5 +16,5 @@ $css_files = array(
     '/public/css/datepicker.css',
 );
 
-include(__DIR__ . '/../html_templates/MyDiary.html');
-include(__DIR__ . '/../../../public/js/libraries/bbc/html/modal-alert.html');
+include(dirname(__FILE__) . '/../html_templates/MyDiary.html');
+include(dirname(__FILE__) . '/../../../public/js/libraries/bbc/html/modal-alert.html');
