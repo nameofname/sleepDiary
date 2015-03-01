@@ -33,8 +33,8 @@ class Auth_Controller extends Sleep_Controller {
 
         // Otherwise, get the user from the user model based on the session.
         } else {
-            $this->load->model('User_model');
-            $this->curr_user = $this->User_Model->by_session($this->session);
+            $this->load->model('User_model', 'user_model');
+            $this->curr_user = $this->user_model->by_session($this->session);
         }
     }
 }
