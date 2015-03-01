@@ -14,7 +14,7 @@ class Login extends Auth_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('User_Model');
+        $this->load->model('User_model', 'user_model');
         $this->session = SessionInstance::getInstance();
     }
 
@@ -23,13 +23,13 @@ class Login extends Auth_Controller {
      */
     public function login () {
         $data = $this->_get_data();
-        $existing_user = $this->User_Model->by_login($data);
+        $existing_user = $this->user_model->by_login($data);
 
         if ($existing_user) {
             // Update the user's session token to a new (unused) token :
-            $new_token = $this->User_Model->get_unused_token();
+            $new_token = $this->user_model->get_unused_token();
             $existing_user->token = $new_token;
-            $this->User_Model->put($existing_user);
+            $this->user_model->put($existing_user);
 
             // Set the session on the client machine :
             $this->session->set_session($new_token);
@@ -56,7 +56,7 @@ class Login extends Auth_Controller {
             return $this->_send_output($error, 400);
         }
 
-        $existing_user = $this->User_Model->by_email($data['email']);
+        $existing_user = $this->user_model->by_email($data['email']);
         if ($existing_user)
         {
             $error = new stdClass();
@@ -66,7 +66,7 @@ class Login extends Auth_Controller {
         }
 
         // The use model "post" method will generate a user with a new (unused) token.
-        $new_user = $this->User_Model->post($data);
+        $new_user = $this->user_model->post($data);
 
         // Set the session on the client machine :
         $this->session->set_session($new_user->token);
