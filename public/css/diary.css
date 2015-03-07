@@ -31,8 +31,11 @@
     user-select: none;
 }
 
-.diary-row div:nth-child(2) {
+.cell-container div:nth-child(1) {
     border-bottom : 0px;
+}
+.diary-row {
+    margin-bottom: 15px;
 }
 
 .time-hour.AWAKE {

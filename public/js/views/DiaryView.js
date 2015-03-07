@@ -53,15 +53,14 @@
         render : function () {
             this.$el.html(this.template(this.model.toJSON()));
             this.renderTimes();
+            this.totalTime();
+
             return this;
         },
 
         renderTimes : function () {
-
             var midnight = this._getTimeRange(true, 12, 12);
-
             var morning = this._getTimeRange(true, 1, 11);
-
             var noon = this._getTimeRange(false, 12, 12);
             var night = this._getTimeRange(false, 1, 11);
 
@@ -126,7 +125,7 @@
         _addDivider : function(label) {
             this._currContainer = $('<div>').addClass('time-container');
             this._currContainer.prepend($('<div>').addClass('time-ampm').html(label));
-            this.$el.append(this._currContainer);
+            this.$('.cell-container').append(this._currContainer);
         },
 
         /**
@@ -169,8 +168,30 @@
             this.model.set(time, state);
             clearTimeout(this._timeout);
             this._timeout = setTimeout(function () {
-                this.model.save();
+                this.model.save(null, {
+                    success : this.totalTime.bind(this)
+                });
             }.bind(this), 1000);
+        },
+
+        totalTime : function () {
+            var sleepArr = [];
+            var hours;
+            var minutes;
+
+            sleepArr = _.filter(_.keys(this.model.toJSON()), function (timeKey) {
+                if (this._isTimeKey(timeKey)) {
+                    if (this.model.get(timeKey) === 'ASLEEP') {
+                        return timeKey;
+                    }
+                }
+            }, this);
+
+            hours = Math.floor(sleepArr.length / 4);
+            minutes = ((sleepArr.length % 4) * 15).toString();
+            minutes = minutes.length === 1 ? '00' : minutes;
+
+            this.$('.total-sleep').html('Time Slept ' + hours + ':' + minutes);
         }
 
     });
