@@ -53,7 +53,7 @@
         render : function () {
             this.$el.html(this.template(this.model.toJSON()));
             this.renderTimes();
-            this.totalTime();
+            this.showTotalTime();
 
             return this;
         },
@@ -169,17 +169,18 @@
             clearTimeout(this._timeout);
             this._timeout = setTimeout(function () {
                 this.model.save(null, {
-                    success : this.totalTime.bind(this)
+                    success : function () {
+                        this.showTotalTime();
+                        this.showSaved();
+                    }.bind(this)
                 });
             }.bind(this), 1000);
         },
 
-        totalTime : function () {
-            var sleepArr = [];
+        showTotalTime : function () {
             var hours;
             var minutes;
-
-            sleepArr = _.filter(_.keys(this.model.toJSON()), function (timeKey) {
+            var sleepArr = _.filter(_.keys(this.model.toJSON()), function (timeKey) {
                 if (this._isTimeKey(timeKey)) {
                     if (this.model.get(timeKey) === 'ASLEEP') {
                         return timeKey;
@@ -192,6 +193,13 @@
             minutes = minutes.length === 1 ? '00' : minutes;
 
             this.$('.total-sleep').html('Time Slept ' + hours + ':' + minutes);
+        },
+
+        showSaved : function () {
+            this.$('.fa-check-circle').removeClass('hidden');
+            setTimeout(function () {
+                this.$('.fa-check-circle').addClass('hidden');
+            }.bind(this), 3000)
         }
 
     });
