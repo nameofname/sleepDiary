@@ -180,7 +180,7 @@
             clearTimeout(this._timeout);
             this._timeout = setTimeout(function () {
                 this.model.save();
-            }.bind(this), 300);
+            }.bind(this), 1000);
         }
 
     });
