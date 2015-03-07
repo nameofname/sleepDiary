@@ -57,31 +57,14 @@
         },
 
         renderTimes : function () {
-            //console.log(1, new Date().getSeconds(), new Date().getMilliseconds());
-            var morning = this._getTimeRange(true, 9, 11);
-            var noon = this._getTimeRange(false, 12, 12);
-            var afternoon = this._getTimeRange(false, 1, 8);
-            var evening = this._getTimeRange(false, 9, 11);
-            var midnight = this._getTimeRange(true, 12, 12);
-            var night = this._getTimeRange(true, 1, 8);
+            var am = this._getTimeRange(true, 1, 12);
+            var pm = this._getTimeRange(false, 1, 12);
 
-            // First add the divider with the "Day" label
-            // Next loop over the day values and add each cell :
-            // Now add another divider with the "Night" label
-            // Finally add each of the night cells :
-            //console.log(2, new Date().getSeconds(), new Date().getMilliseconds());
-            this._addDivider('Night :');
+            this._addDivider('PM :');
+            this._addTimes(pm);
 
-            this._addTimes(evening);
-            this._addTimes(midnight);
-            this._addTimes(night);
-
-            this._addDivider('Day : : ');
-
-            this._addTimes(morning);
-            this._addTimes(noon);
-            this._addTimes(afternoon);
-            //console.log(3, new Date().getSeconds(), new Date().getMilliseconds());
+            this._addDivider('AM :');
+            this._addTimes(am);
         },
 
         /**
