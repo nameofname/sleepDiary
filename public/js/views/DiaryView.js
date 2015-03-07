@@ -193,7 +193,6 @@
         template : _.template($('#DiaryRowTime-template').html(), null, {variable : 'data'}),
 
         events : {
-            //'click' : 'checkToggleDozing',
             'mousedown' : 'checkToggleDozing',
             'mouseenter' : 'checkToggleSleep'
         },

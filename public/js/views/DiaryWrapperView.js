@@ -36,6 +36,8 @@
         },
 
         _initDatePicker : function () {
+            var date = this._getDate();
+            this.$('.datepicker').data('date', date);
             this.datepicker = this.$('.datepicker').datepicker({
                 autoclose : true
             })
@@ -49,6 +51,15 @@
             if (this.datepicker) {
                 this.datepicker.datepicker('hide');
             }
+        },
+
+        _getDate : function () {
+            var d = new Date();
+            var arr = d.toLocaleDateString().split('/');
+            arr.forEach(function (val, index) {
+                arr[index] = (val.toString().length === 1) ? '0' + val : val;
+            });
+            return arr.join('-');
         },
 
         /**
