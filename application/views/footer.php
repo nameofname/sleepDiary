@@ -1,3 +1,4 @@
+<div id="footerSpacer" class="row"></div>
 <div id="footer" class="row">
     <div class="col-xs-12">
         <h1 class="small">
