@@ -57,14 +57,21 @@
         },
 
         renderTimes : function () {
-            var am = this._getTimeRange(true, 1, 12);
-            var pm = this._getTimeRange(false, 1, 12);
 
-            this._addDivider('PM :');
-            this._addTimes(pm);
+            var midnight = this._getTimeRange(true, 12, 12);
+
+            var morning = this._getTimeRange(true, 1, 11);
+
+            var noon = this._getTimeRange(false, 12, 12);
+            var night = this._getTimeRange(false, 1, 11);
 
             this._addDivider('AM :');
-            this._addTimes(am);
+            this._addTimes(midnight);
+            this._addTimes(morning);
+
+            this._addDivider('PM :');
+            this._addTimes(noon);
+            this._addTimes(night);
         },
 
         /**
