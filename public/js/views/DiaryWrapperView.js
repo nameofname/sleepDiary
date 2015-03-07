@@ -55,10 +55,11 @@
 
         _getDate : function () {
             var d = new Date();
-            var arr = d.toLocaleDateString().split('/');
+            var arr = [d.getMonth()+1, d.getDate()];
             arr.forEach(function (val, index) {
                 arr[index] = (val.toString().length === 1) ? '0' + val : val;
             });
+            arr.unshift(d.getFullYear());
             return arr.join('-');
         },
 

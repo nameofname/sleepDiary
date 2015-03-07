@@ -28,6 +28,7 @@ class Day extends Base_Model {
             'date' => $data['date']
         );
 
+        die(json_encode($insert_data));
         $this->db->insert('day', $insert_data);
 
         $id = $this->db->insert_id();
