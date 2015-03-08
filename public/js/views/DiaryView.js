@@ -51,7 +51,9 @@
         },
 
         render : function () {
-            this.$el.html(this.template(this.model.toJSON()));
+            var tmpVars = this.model.toJSON();
+            tmpVars.date = new Date(tmpVars.date).toDateString();
+            this.$el.html(this.template(tmpVars));
             this.renderTimes();
             this.showTotalTime();
 
