@@ -52,7 +52,7 @@
 
         render : function () {
             var tmpVars = this.model.toJSON();
-            tmpVars.date = new Date(tmpVars.date).toDateString();
+            tmpVars.date = this._formateDate();
             this.$el.html(this.template(tmpVars));
             this.renderTimes();
             this.showTotalTime();
@@ -84,7 +84,6 @@
          * @private
          */
         _getTimeRange : function (am, lowerBound, upperBound) {
-
             var out = [];
             for (var i=lowerBound; i<=upperBound; i++) {
                 for (var j=0; j<=3; j++) {
@@ -117,6 +116,14 @@
                 return inRange;
 
             }, this);
+        },
+
+        _formateDate : function () {
+            var d = new Date(this.model.get('date'));
+            var arr = d.toUTCString().split(' ');
+            arr.pop();
+            arr.pop();
+            return arr.join(' ');
         },
 
         /**
