@@ -1,10 +1,28 @@
+.container {
+    min-width : 1170px;
+}
+
 .time {
+    overflow : visible;
     color : #919191;
     font-size: 10px;
     float : left;
-    margin : 1px;
-    height : 20px;
-    width: 20px;
+    height : 30px;
+    width: 11px;
+    margin-top : 2px;
+    margin-bottom : 2px;
+}
+
+.time-raised-text {
+    position: relative;
+    top : -30px;
+}
+
+.time:nth-child(4n+1) {
+    margin-left : 3px;
+}
+.time:last-of-type {
+    margin-right: 3px;
 }
 
 .time-hour {
@@ -31,9 +49,10 @@
     user-select: none;
 }
 
-.cell-container div:nth-child(1) {
-    border-bottom : 0px;
-}
+/*.cell-container div:nth-child(1) {*/
+    /*border-bottom : 0px;*/
+/*}*/
+
 .diary-row {
     margin-bottom: 15px;
 }

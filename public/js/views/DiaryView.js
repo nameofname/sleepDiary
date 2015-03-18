@@ -61,18 +61,18 @@
         },
 
         renderTimes : function () {
-            var midnight = this._getTimeRange(true, 12, 12);
-            var morning = this._getTimeRange(true, 1, 11);
             var noon = this._getTimeRange(false, 12, 12);
             var night = this._getTimeRange(false, 1, 11);
+            var midnight = this._getTimeRange(true, 12, 12);
+            var morning = this._getTimeRange(true, 1, 11);
 
-            this._addDivider('AM :');
-            this._addTimes(midnight);
-            this._addTimes(morning);
+            this._currContainer = $('<div>').addClass('time-container');
+            this.$('.cell-container').append(this._currContainer);
 
-            this._addDivider('PM :');
             this._addTimes(noon);
             this._addTimes(night);
+            this._addTimes(midnight);
+            this._addTimes(morning);
         },
 
         /**
@@ -124,17 +124,6 @@
             arr.pop();
             arr.pop();
             return arr.join(' ');
-        },
-
-        /**
-         * Helper function to add a divider between the sub-views. Divides the rows into day / night.
-         * @param label
-         * @private
-         */
-        _addDivider : function(label) {
-            this._currContainer = $('<div>').addClass('time-container');
-            this._currContainer.prepend($('<div>').addClass('time-ampm').html(label));
-            this.$('.cell-container').append(this._currContainer);
         },
 
         /**
