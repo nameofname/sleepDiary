@@ -24,23 +24,16 @@
     });
 
     $.when(dfd)
+
+        // On success, render the diary page :
         .done(function () {
             _renderWrapper();
         })
 
         // On fail, show an error in the form of an alert view.
-            .fail(function () {
-
+        .fail(function () {
             _renderWrapper();
             app.wrapper.showError();
-
-
-
-            //new BBC.AlertView({
-            //    type : 'danger',
-            //    place : $('#JsContent'),
-            //    message : "We're sorry, There was an error when trying to retrieve your data. Please try again."
-            //}).render();
         });
 
 })();
