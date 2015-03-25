@@ -50,12 +50,16 @@
             this.on('changeSleepState', this.changeSleepState);
         },
 
-        render : function () {
+        render : function (options) {
+            this.$el.empty();
             var tmpVars = this.model.toJSON();
             tmpVars.date = this._formateDate();
             this.$el.html(this.template(tmpVars));
             this.renderTimes();
             this.showTotalTime();
+            if (options && options.showSaved) {
+                this.showSaved();
+            }
 
             return this;
         },
@@ -168,8 +172,7 @@
             this._timeout = setTimeout(function () {
                 this.model.save(null, {
                     success : function () {
-                        this.showTotalTime();
-                        this.showSaved();
+                        return this.render({showSaved : true});
                     }.bind(this)
                 });
             }.bind(this), 1000);
