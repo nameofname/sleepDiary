@@ -63,17 +63,17 @@ class Day extends Base_Model {
         }
     }
 
-    private function get_by_uid ($id) {
+    public function get_by_uid ($id) {
         $query = $this->db->query("Select * from day where user_id = '$id' order by date desc");
         return $query->result_array();
     }
 
-    private function get_by_id ($id) {
+    public function get_by_id ($id) {
         $query = $this->db->query("Select * from day where id = '$id' order by date desc");
         return $query->row();
     }
 
-    public function validate_post ($data) {
+    public   function validate_post ($data) {
         $has_duplicates = $this->_find_duplicates($data);
         if ($has_duplicates) {
             return 'cannot_create_duplicates';

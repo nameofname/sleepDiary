@@ -26,6 +26,8 @@
 
             this._initDatePicker();
 
+            this.getAverageSleepTime();
+
             return this;
         },
 
@@ -35,6 +37,10 @@
             });
         },
 
+        /**
+         * Inits instance of date picker. Sets it to start at today. Hooks up change event to create a new day model.
+         * @private
+         */
         _initDatePicker : function () {
             var date = this._getDate();
             this.$('.datepicker').data('date', date);
@@ -53,6 +59,11 @@
             }
         },
 
+        /**
+         * Gets the current date from client settings. Used to init the date picker to the correct date.
+         * @returns {string}
+         * @private
+         */
         _getDate : function () {
             var d = new Date();
             var arr = [d.getMonth()+1, d.getDate()];
@@ -98,6 +109,31 @@
                 place : $('.error-container'),
                 message : messages[code] || messages.default
             }).render();
+        },
+
+        /**
+         * Makes a request to the computation endpoint to get the user's average sleep time :
+         */
+        getAverageSleepTime : function () {
+            var comp = new app.Computation();
+            var data = {
+                query : 'average_sleep_time',
+                user_id : user.get('id')
+            };
+            comp.fetch({
+                data : data,
+                success : function (model) {
+                    var average = model.get('average');
+                    if (!average && average !== 0) {
+                        return;
+                    }
+                    return this.showAverageSleepTime(average);
+                }.bind(this)
+            });
+        },
+
+        showAverageSleepTime : function (average) {
+            debugger;
         }
 
     });
