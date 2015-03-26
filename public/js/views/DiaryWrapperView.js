@@ -6,10 +6,16 @@
         default : "We're sorry, There was an error when trying to retrieve your data. Please try again.",
         cannot_create_duplicates : "You have already created a record for this date. You may not create 2 records for the same day."
     };
+    var _avgString = '<p class="text-success pull-right">Average Time Slept : <span class="badge"><%= obj.average %></span> Hours per night</p>';
+    var _avgTemplate = _.template(_avgString, null, {variable : 'obj'});
 
     app.DiaryWrapperView = BBC.BaseView.extend({
 
         template : _.template($('#DiaryWrapper-template').html(), null, {variable : 'data'}),
+
+        viewEvents : {
+            'getAverage' : 'getAverageSleepTime'
+        },
 
         render : function () {
 
@@ -127,13 +133,18 @@
                     if (!average && average !== 0) {
                         return;
                     }
-                    return this.showAverageSleepTime(average);
+                    return this.showAverageSleepTime(model.toJSON());
                 }.bind(this)
             });
         },
 
-        showAverageSleepTime : function (average) {
-            debugger;
+        /**
+         * Displays the average sleep time as a badge.
+         * @param json
+         */
+        showAverageSleepTime : function (json) {
+            this.$('.stats').empty();
+            this.$('.stats').append(_avgTemplate(json));
         }
 
     });

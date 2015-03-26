@@ -200,7 +200,9 @@
             this.$('.fa-check-circle').removeClass('hidden');
             setTimeout(function () {
                 this.$('.fa-check-circle').addClass('hidden');
-            }.bind(this), 3000)
+            }.bind(this), 3000);
+
+            this.publish('getAverage');
         }
 
     });
