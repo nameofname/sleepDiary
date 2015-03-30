@@ -130,6 +130,7 @@
                 data : data,
                 success : function (model) {
                     var average = model.get('average');
+                    model.set('average', average.toString().slice(0,4));
                     if (!average && average !== 0) {
                         return;
                     }
