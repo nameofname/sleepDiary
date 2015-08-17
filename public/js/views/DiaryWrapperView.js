@@ -37,12 +37,6 @@
             return this;
         },
 
-        initialize : function () {
-            this.subViews.add('diary', app.DiaryView, {
-                collection : app.days
-            });
-        },
-
         /**
          * Inits instance of date picker. Sets it to start at today. Hooks up change event to create a new day model.
          * @private
