@@ -7,7 +7,7 @@ $js_files = array(
     '/public/js/models/Day.js',
     '/public/js/models/Computation.js',
     '/public/js/collections/Days.js',
-//    '/public/js/views/DiaryRowView.js',
+    '/public/js/views/DiaryRowView.js', // TODO !!! comment this oout!!!!!!
     '/public/js/views/DaySummaryView.js',
     '/public/js/views/DiaryWrapperView.js',
     '/public/js/pages/diary.js',

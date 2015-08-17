@@ -1,6 +1,7 @@
 (function () {
     "use strict";
 
+    var Day = app.Day;
     // Globally (to this module) listen for mouse down so we can check later if the mouse is depressed :
     var _down = false;
     $(document).mousedown(function(e) {
@@ -163,7 +164,7 @@
             var minutes;
             var sleepArr = _.filter(_.keys(this.model.toJSON()), function (timeKey) {
                 if (this._isTimeKey(timeKey)) {
-                    if (this.model.get(timeKey) === 'ASLEEP') {
+                    if (this.model.get(timeKey) === Day.enums.ASLEEP) {
                         return timeKey;
                     }
                 }
@@ -211,20 +212,20 @@
 
         toggleSleep : function (e) {
             var currState = this.model.get('state');
-            var newState = currState === 'AWAKE' ? 'ASLEEP' : 'AWAKE';
+            var newState = currState === Day.enums.AWAKE ? Day.enums.ASLEEP : Day.enums.AWAKE;
             return this._setState(newState);
         },
 
         checkToggleDozing : function (e) {
             if (e.shiftKey || e.ctrlKey) {
-                return this._setState('DOZING');
+                return this._setState(Day.enums.DOZING);
             } else {
                 return this.toggleSleep();
             }
         },
 
         _setState : function (newState) {
-            var states = ['ASLEEP', 'AWAKE', 'DOZING'];
+            var states = [Day.enums.ASLEEP, Day.enums.AWAKE, Day.enums.DOZING];
             _.each(states, function (val) {
                 this.$('.time-hour').removeClass(val);
             }, this);
