@@ -16,20 +16,16 @@
             ));
 
 
-            // rip through these bitchers : app.DiaryTimeView
-
+            // rip through all of the times on the model adding time views as you go :
             _.each(this.model.getAllTimes(), function (val, key) {
                 var obj = {};
                 obj[key] = val;
-                var newView = new app.DiaryTimeView({
+                var newView = this.subViews.add(app.TimeView, {
                     model : new app.Time(obj, {parse : true})
                 });
-                debugger;
+
                 this.$('.time-container').append(newView.render().$el);
             }, this);
-
-            debugger;
-
 
             return this;
         },
