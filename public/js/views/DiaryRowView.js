@@ -11,26 +11,6 @@
         _down = false;
     });
 
-    app.DiaryView = BBC.BaseView.extend({
-
-        template : _.template($('#Diary-template').html(), null, {variable : 'data'}),
-
-        render : function () {
-            var self = this;
-
-            this.collection.each(function (dayModel) {
-                var newView = self.subViews.add(app.DiaryRowView, {
-                    model : dayModel
-                }).render();
-
-                self.$el.append(newView.$el);
-            });
-
-            return this;
-        }
-
-    });
-
     /**
      * Row view represents each day model. For each day you can click on the time slots to indicate your sleep patterns.
      * This view has as it's sub views a collection of DiaryTimeViews (below)

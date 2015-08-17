@@ -17,23 +17,28 @@
             'getAverage' : 'getAverageSleepTime'
         },
 
+        /**
+         * Render empties everything out, then rips through the collection adding a day summary view for each day
+         * record returned, then set up some events.
+         * @returns {app.DiaryWrapperView}
+         */
         render : function () {
 
             this._hideDatePicker();
             this.subViews.empty();
             this.$el.empty();
-
-            var diaryView = this.subViews.add(app.DiaryView, {
-                collection : this.collection
-            }).render();
-
             this.$el.append(this.template());
-            this.$('#diary').append(diaryView.el);
+
+            this.collection.each(function (dayModel) {
+                var newView = this.subViews.add(app.DaySummaryView, {
+                    model : dayModel
+                }).render();
+
+                this.$('#diary').append(newView.$el);
+            }, this);
 
             this._initDatePicker();
-
             this.getAverageSleepTime();
-
             return this;
         },
 
