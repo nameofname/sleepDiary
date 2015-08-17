@@ -1,10 +1,18 @@
 <script type="text/template" id="Day-summary-template">
 
     <div class="row">
-        </di class="col-xs-12">
-        <p>
-            <%= JSON.stringify(data) %>
-        </p>
+        <div class="col-xs-12">
+        <p>Total Time Slept : <%= data.timeSlept %></p>
+        <p>Total Time Dozing : <%= data.timeDozing %></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="time-container">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <hr />
         </div>
     </div>
 

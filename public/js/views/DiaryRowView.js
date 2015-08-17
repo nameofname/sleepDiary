@@ -72,7 +72,7 @@
             var out = [];
             for (var i=lowerBound; i<=upperBound; i++) {
                 for (var j=0; j<=3; j++) {
-                    var mins = j * 15;
+                    var mins = j * Day.enums.TIME_INCREMENT;
                     mins = mins == 0 ? '00' : mins;
                     out.push(i + ':' + mins + (am ? 'am' : 'pm'));
                 }
@@ -120,6 +120,7 @@
         _addTimes : function (timeArr) {
             _.each(timeArr, function (fullTime) {
 
+                // TODO !!!! rely on the time model!!!!!!!!
                 var val = this.model.get(fullTime);
                 var currLen = this.subViews.length;
                 var hour = fullTime.split(':')[0];
@@ -171,7 +172,7 @@
             }, this);
 
             hours = Math.floor(sleepArr.length / 4);
-            minutes = ((sleepArr.length % 4) * 15).toString();
+            minutes = ((sleepArr.length % 4) * Day.enums.TIME_INCREMENT).toString();
             minutes = minutes.length === 1 ? '00' : minutes;
 
             this.$('.total-sleep').html('Time Slept ' + hours + ':' + minutes);
@@ -189,6 +190,15 @@
     });
 
 
+    /**
+     * The diary time view is a single time cell. To use pass in an object with the following properties :
+     *      displayTime - the time to be displayed in the cell
+     *      time - the actual time key from the day model
+     *      state - the value for that time in the model, ie. [ ASLEEP, AWAKE, DOZING ].
+     * ***NOTE : These keys are the contents of the time model.
+     *
+     * @type {void|*}
+     */
     app.DiaryTimeView = BBC.BaseView.extend({
 
         className : 'time',
