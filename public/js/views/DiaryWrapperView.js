@@ -81,7 +81,7 @@
         },
 
         /**
-         * Adds a new Day record, with the given date.
+         * Creates a new Day record with the given date. Invoked by date-picker callback.
          * @param date
          */
         addDay : function (date) {
