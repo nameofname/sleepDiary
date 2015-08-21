@@ -8,7 +8,7 @@
      * This view has as it's sub views a collection of TimeView
      * @type {void|*}
      */
-    app.DiaryRowView = BBC.BaseView.extend({
+    app.DiaryUpdateDayView = BBC.BaseView.extend({
 
         className : 'diary-row',
 
@@ -117,6 +117,7 @@
                 var hour = fullTime.split(':')[0];
 
                 var timeView = this.subViews.add(app.TimeView, {
+                    enableWriting : true,
                     model : new Backbone.Model({
                         displayTime : (currLen % 4 === 0) ? hour : '',
                         time : fullTime,

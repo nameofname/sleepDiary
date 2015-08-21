@@ -13,11 +13,14 @@
     });
 
     /**
-     * The diary time view is a single time cell. To use pass in an object with the following properties :
-     *      displayTime - the time to be displayed in the cell
-     *      time - the actual time key from the day model
-     *      state - the value for that time in the model, ie. [ ASLEEP, AWAKE, DOZING ].
+     * The diary time view is a single time cell. To use pass in an Model with the following properties :
+     *      - displayTime - the time to be displayed in the cell
+     *      - time - the actual time key from the day model
+     *      - state - the value for that time in the model, ie. [ ASLEEP, AWAKE, DOZING ].
      * ***NOTE : These keys are the contents of the time model.
+     * This view also accepts an options object with the following :
+     *      - enableWriting <bool> - defaults false. If true then events are enabled to click cells and record
+     *      sleep times. If false cells display a darker color and no events are available.
      *
      * @type {void|*}
      */
@@ -27,9 +30,20 @@
 
         template : _.template($('#DiaryRowTime-template').html(), null, {variable : 'data'}),
 
-        events : {
+        _events : {
             'mousedown' : 'checkToggleDozing',
             'mouseenter' : 'checkToggleSleep'
+        },
+
+        initialize : function (options) {
+            this.enableWriting = !!options.enableWriting;
+
+            if (this.enableWriting) {
+                this.events = this._events;
+                this.model.set('displayWritable', this.enableWriting);
+            }
+
+            return app.TimeView.__super__.initialize.apply(this, arguments);
         },
 
         /**

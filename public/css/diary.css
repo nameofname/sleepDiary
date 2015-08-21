@@ -49,10 +49,6 @@
     user-select: none;
 }
 
-/*.cell-container div:nth-child(1) {*/
-    /*border-bottom : 0px;*/
-/*}*/
-
 .diary-row {
     margin-bottom: 15px;
 }
@@ -63,6 +59,9 @@
 }
 .time-hour.ASLEEP {
     background-color: #D9EDF7;
+}
+.time-hour.ASLEEP.time-hour-read-only {
+    background-color: #BBB;
 }
 .time-hour.DOZING {
     /*background-color: #FCF8E3;*/

@@ -3,6 +3,11 @@
 
     var enums = app.Day.enums;
 
+    /**
+     * Similar to the writable day view, this view displays a summary of time slept using the same time views but
+     * without writable functionality.
+     * @type {void|*}
+     */
     app.DaySummaryView = BBC.BaseView.extend({
 
         template : _.template($('#Day-summary-template').html(), null, {variable : 'data'}),

@@ -30,7 +30,6 @@
             this.$el.append(this.template());
 
             this.collection.each(function (dayModel) {
-                //var newView = this.subViews.add(app.DiaryRowView, {
                 var newView = this.subViews.add(app.DaySummaryView, {
                     model : dayModel
                 }).render();
