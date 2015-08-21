@@ -1,4 +1,4 @@
-a<?php
+<?php
 $js_files = array(
     '/public/js/libraries/bbc/BaseView.js',
     '/public/js/libraries/bbc/modules/AlertView.js',
