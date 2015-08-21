@@ -25,6 +25,10 @@
 <div id="wrapper" class='container'>
 
     <div class="row">
+        <div class="error-container" class="col-xs-12">
+        </div>
+    </div>
+    <div class="row">
         <div id="JsContent" class="col-xs-12">
         </div>
     </div>

@@ -12,7 +12,8 @@ class Page extends Auth_Controller {
     public $titles = array(
         'home' => "Home | Sleep Diary",
         'my_diary' => "My Diary | Sleep Diary",
-        'not_found' => "Not found (404)"
+        'not_found' => "Not found (404)",
+        'edit_day' => "Edit times slept"
     );
 
     public function __construct() {
@@ -40,6 +41,10 @@ class Page extends Auth_Controller {
 
         // Serve up the diary page.
         return $this->_create_page('my_diary');
+    }
+
+    public function edit($id=null) {
+        return $this->_create_page('edit_day');
     }
 
     /**

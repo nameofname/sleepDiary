@@ -99,6 +99,8 @@ $route['login/(:any)'] = "login/$1";
 $route['home'] = "page/home";
 $route['my_diary'] = "page/my_diary";
 
+$route['edit/(:any)'] = "page/edit";
+
 $route[''] = "page/home";
 
 /* End of file routes.php */

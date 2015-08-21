@@ -2,10 +2,6 @@
     "use strict";
 
     var user  = new app.User(app.currUserData);
-    var messages = {
-        default : "We're sorry, There was an error when trying to retrieve your data. Please try again.",
-        cannot_create_duplicates : "You have already created a record for this date. You may not create 2 records for the same day."
-    };
     var _avgString = '<p class="text-success pull-right">Average Time Slept : <span class="badge"><%= obj.average %></span> Hours per night</p>';
     var _avgTemplate = _.template(_avgString, null, {variable : 'obj'});
 
@@ -104,16 +100,12 @@
         },
 
         /**
-         *
+         * Displays an error message at the top of the page
          * @param code
          */
         showError : function (code) {
             this._hideDatePicker();
-            new BBC.AlertView({
-                type : 'danger',
-                place : $('.error-container'),
-                message : messages[code] || messages.default
-            }).render();
+            app.helpers.showError(code);
         },
 
         /**

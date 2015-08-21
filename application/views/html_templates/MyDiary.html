@@ -1,9 +1,12 @@
 <script type="text/template" id="Day-summary-template">
 
     <div class="row">
-        <div class="col-xs-12">
-        <p>Total Time Slept : <%= data.timeSlept %></p>
-        <p>Total Time Dozing : <%= data.timeDozing %></p>
+        <div class="col-xs-3">
+            <p>Total Time Slept : <%= data.timeSlept %></p>
+            <p>Total Time Dozing : <%= data.timeDozing %></p>
+        </div>
+        <div class="col-xs-3">
+            <a href="/edit/<%= data.id %>"><i class="fa fa-pencil-square-o fa-2x"></i> Edit</a>
         </div>
     </div>
     <div class="row">
