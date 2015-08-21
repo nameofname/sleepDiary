@@ -6,7 +6,7 @@
     }
 
     var user = new app.User(app.currUserData);
-    var id = document.location.pathname.split('/');
+    var id = document.location.pathname.split('/').pop();
     app.day = new app.Day();
 
     var _renderView = function () {

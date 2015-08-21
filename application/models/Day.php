@@ -69,7 +69,8 @@ class Day extends Base_Model {
     }
 
     public function get_by_id ($id) {
-        $query = $this->db->query("Select * from day where id = '$id' order by date desc");
+//        die(var_dump($id));
+        $query = $this->db->query("Select * from day where id = '$id'");
         return $query->row();
     }
 

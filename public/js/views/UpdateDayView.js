@@ -8,11 +8,11 @@
      * This view has as it's sub views a collection of TimeView
      * @type {void|*}
      */
-    app.DiaryUpdateDayView = BBC.BaseView.extend({
+    app.UpdateDayView = BBC.BaseView.extend({
 
         className : 'diary-row',
 
-        template : _.template($('#DiaryRow-template').html(), null, {variable : 'data'}),
+        template : _.template($('#UpdateDay-template').html(), null, {variable : 'data'}),
 
         _timeout : null,
         _currContainer : null,
