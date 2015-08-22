@@ -19,7 +19,9 @@
 
     dfd = app.days.fetch({
         data : {
-            user_id : user.get('id')
+            user_id : user.get('id'),
+            offset : 0,
+            limit : 30
         }
     });
 

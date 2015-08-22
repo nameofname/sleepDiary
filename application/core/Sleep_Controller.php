@@ -12,14 +12,12 @@ class Sleep_Controller extends CI_Controller {
      * @param int $http_code
      */
     protected function _send_output ($data, $http_code=200) {
-        $out = new stdClass();
-        $out->result = $data;
         $status_msg = ($http_code === 200) ? 'success' : 'error';
 
         $this->output
             ->set_status_header($http_code, $status_msg)
             ->set_content_type('application/json')
-            ->set_output(json_encode($out));
+            ->set_output(json_encode($data));
     }
 
 }

@@ -13,7 +13,7 @@ class Day extends Base_Model {
         if (isset($data['id'])) {
             return $this->get_by_id($data['id']);
         } elseif (isset($data['user_id'])) {
-            return $this->get_by_uid($data['user_id']);
+            return $this->get_by_uid($data);
         }
     }
 
@@ -63,13 +63,21 @@ class Day extends Base_Model {
         }
     }
 
-    public function get_by_uid ($id) {
-        $query = $this->db->query("Select * from day where user_id = '$id' order by date desc");
-        return $query->result_array();
+    public function get_by_uid ($data) {
+        $id = isset($data['user_id']) ? $data['user_id'] : null;
+        $limit = isset($data['limit']) ? $data['limit'] : null;
+        $offset = isset($data['offset']) ? $data['offset'] : null;
+
+        if ($offset && $limit) {
+            $query = $this->db->query("Select * from day where user_id = '$id' order by date desc limit $limit offset $offset");
+        } else {
+            $query = $this->db->query("Select * from day where user_id = '$id' order by date desc");
+        }
+
+        return $this->return_page($query, $offset, $limit);
     }
 
     public function get_by_id ($id) {
-//        die(var_dump($id));
         $query = $this->db->query("Select * from day where id = '$id'");
         return $query->row();
     }

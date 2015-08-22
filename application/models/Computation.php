@@ -50,7 +50,8 @@ class Computation extends Base_Model {
 
         // Query for all the days for this user :
         $day = new Day();
-        $res = $day->get_by_uid($id);
+        $res = $day->get_by_uid($data);
+        $res = $res->result;
 
         if (!count($res)) {
             throw new ErrorException("Your query for average sleep times returned no results for user $id");
