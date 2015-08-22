@@ -39,7 +39,17 @@
             this.limit = parseInt(this.limit, 10) + parseInt(this.pageSize, 10);
             this.offset = parseInt(this.offset) + parseInt(this.pageSize, 10);
 
-            debugger;
+            return this._pager(data);
+        },
+
+        getPrevPage : function (data) {
+            this.limit = parseInt(this.limit, 10) - parseInt(this.pageSize, 10);
+            this.offset = parseInt(this.offset) - parseInt(this.pageSize, 10);
+
+            return this._pager(data);
+        },
+
+        _pager : function (data) {
             data = _.extend(data || {}, {
                 limit : this.limit,
                 offset : this.offset

@@ -9,11 +9,7 @@
     var user = new app.User(app.currUserData);
     var dfd;
 
-    var _fetchNextPage = function () {
-        dfd = app.days.getNextPage({
-            user_id : user.get('id')
-        });
-
+    var _wait = function (dfd) {
         $.when(dfd)
             // On success, render the diary page :
             .done(function () {
@@ -26,6 +22,19 @@
                 app.wrapper.showError();
             });
     };
+    var _fetchPrevPage = function () {
+        dfd = app.days.getPrevPage({
+            user_id : user.get('id')
+        });
+        return _wait(dfd);
+    };
+    var _fetchNextPage = function () {
+        dfd = app.days.getNextPage({
+            user_id : user.get('id')
+        });
+
+        return _wait(dfd);
+    };
 
     var _initEvents = function () {
         app.wrapper.on('nextPage', function () {
@@ -35,7 +44,7 @@
 
         app.wrapper.on('prevPage', function () {
             this.remove();
-            _fetchNextPage() // TODO !!!!!! make a prev page function here !!!!!
+            _fetchPrevPage() // TODO !!!!!! make a prev page function here !!!!!
         });
     };
     var _renderWrapper = function () {
