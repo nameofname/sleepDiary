@@ -13,9 +13,9 @@
         offset : -10, // starting at negative number because it will be incremented every time getNextPage is called.
 
         parse : function (data) {
-            this.limit = data.limit || null;
-            this.offset = data.offset || null;
-            this.totalSize  = data.totalSize || null;
+            this.limit = parseInt(data.limit, 10) || 0;
+            this.offset = parseInt(data.offset, 10) || 0;
+            this.totalSize  = parseInt(data.totalSize, 10) || 0;
             return app.BaseModel.prototype.parse.apply(this, arguments);
         },
 
@@ -36,9 +36,10 @@
          * @returns {*}
          */
         getNextPage : function (data) {
-            this.limit += this.pageSize;
-            this.offset += this.pageSize;
+            this.limit = parseInt(this.limit, 10) + parseInt(this.pageSize, 10);
+            this.offset = parseInt(this.offset) + parseInt(this.pageSize, 10);
 
+            debugger;
             data = _.extend(data || {}, {
                 limit : this.limit,
                 offset : this.offset

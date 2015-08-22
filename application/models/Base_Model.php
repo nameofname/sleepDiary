@@ -39,7 +39,6 @@ class Base_Model extends \CI_Model {
         $query = $this->db->query($string_query . " limit $limit offset $offset");
 
         $count = count($count_query->result_array());
-//        die(var_dump($count));
         $data = $query->result_array();
         $out = new stdClass();
         $out->result = $data;

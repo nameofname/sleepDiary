@@ -13,6 +13,11 @@
             'getAverage' : 'getAverageSleepTime'
         },
 
+        events : {
+            'click .next-page' : 'nextPage',
+            'click .prev-page' : 'prevPage'
+        },
+
         /**
          * Render empties everything out, then rips through the collection adding a day summary view for each day
          * record returned, then set up some events.
@@ -140,6 +145,14 @@
         showAverageSleepTime : function (json) {
             this.$('.stats').empty();
             this.$('.stats').append(_avgTemplate(json));
+        },
+
+        nextPage : function () {
+            this.trigger('nextPage');
+        },
+
+        prevPage : function () {
+            this.trigger('prevPage');
         }
 
     });
