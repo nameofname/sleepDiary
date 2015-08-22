@@ -23,7 +23,10 @@
             this._hideDatePicker();
             this.subViews.empty();
             this.$el.empty();
-            this.$el.append(this.template());
+            this.$el.append(this.template({
+                currPage : this.collection.getCurrentPageNum(),
+                totalPages :  this.collection.getTotalPageNum()
+            }));
 
             this.collection.each(function (dayModel) {
                 var newView = this.subViews.add(app.DaySummaryView, {

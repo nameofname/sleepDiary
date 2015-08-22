@@ -68,13 +68,16 @@ class Day extends Base_Model {
         $limit = isset($data['limit']) ? $data['limit'] : null;
         $offset = isset($data['offset']) ? $data['offset'] : null;
 
-        if ($offset && $limit) {
-            $query = $this->db->query("Select * from day where user_id = '$id' order by date desc limit $limit offset $offset");
+        $query_string ="Select * from day where user_id = '$id' order by date desc";
+
+        if (is_numeric($offset) && is_numeric($limit)) {
+            return $this->return_page($query_string, $offset, $limit);
+
         } else {
-            $query = $this->db->query("Select * from day where user_id = '$id' order by date desc");
+            return $this->return_all($query_string);
         }
 
-        return $this->return_page($query, $offset, $limit);
+        return $this->return_page($query_string, $offset, $limit);
     }
 
     public function get_by_id ($id) {
