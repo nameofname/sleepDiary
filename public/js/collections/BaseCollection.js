@@ -36,15 +36,30 @@
          * @returns {*}
          */
         getNextPage : function (data) {
-            this.limit = parseInt(this.limit, 10) + parseInt(this.pageSize, 10);
-            this.offset = parseInt(this.offset) + parseInt(this.pageSize, 10);
+            var limit = parseInt(this.limit, 10) + parseInt(this.pageSize, 10);
+            var offset = parseInt(this.offset) + parseInt(this.pageSize, 10);
+
+            if (offset > this.totalSize) {
+                return false;
+            }
+
+            this.limit = limit;
+            this.offset = offset;
 
             return this._pager(data);
         },
 
         getPrevPage : function (data) {
-            this.limit = parseInt(this.limit, 10) - parseInt(this.pageSize, 10);
-            this.offset = parseInt(this.offset) - parseInt(this.pageSize, 10);
+            var limit = parseInt(this.limit, 10) - parseInt(this.pageSize, 10);
+            var offset = parseInt(this.offset) - parseInt(this.pageSize, 10);
+
+            if (offset < 0) {
+                return false;
+            }
+
+            this.limit = limit;
+            this.offset = offset;
+
 
             return this._pager(data);
         },
