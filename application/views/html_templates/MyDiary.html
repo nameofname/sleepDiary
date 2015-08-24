@@ -25,29 +25,16 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <p class="lead">Hi, you have reached the diary page.</p>
-            <p>TOD UPDATE THIS COPY YOU MORON!!!!!!!!!!!</p>
+            <p class="lead">Hi, you have reached your diary page.</p>
             <p>
-                From here you can create new day records and record your sleep times. To create a new day record
-                click on the "add another day" button at right. The day will appear and you can click on the squares
-                to indicate when you slept. <code>CLICK + DRAG</code> to select multiple squares at once, or
-                <code>SHIFT + CLICK</code> on the squares to indicate you were "DOZING." The system will remember your
-                selections instantly.
+                From here you can view a summary of your recorded sleep times. You can also add new days to your
+                sleep diary. To create a new day record click on the "add another day" button at right.
             </p>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 error-container"></div>
         <hr />
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="pull-right pagination">
-                <i class="prev-page fa fa-arrow-circle-o-left"></i>
-                Page <%= data.currPage %> of <%= data.totalPages %>
-                <i class="next-page fa fa-arrow-circle-o-right"></i>
-            </div>
-        </div>
     </div>
     <div class="row">
         <div class="col-xs-3">
@@ -63,7 +50,27 @@
                 </a>
             </div>
         </div>
-        <div id="diary" class="col-xs-12"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="pull-right pagination">
+                <i class="prev-page fa fa-arrow-circle-o-left"></i>
+                Page <%= data.currPage %> of <%= data.totalPages %>
+                <i class="next-page fa fa-arrow-circle-o-right"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12" id="diary"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="pull-right pagination">
+                <i class="prev-page fa fa-arrow-circle-o-left"></i>
+                Page <%= data.currPage %> of <%= data.totalPages %>
+                <i class="next-page fa fa-arrow-circle-o-right"></i>
+            </div>
+        </div>
     </div>
 </script>
 
@@ -81,7 +88,14 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <p>This is the edit page where you enter the time slept for a given day. </p>
+            <p>
+                Edit your sleep times for <b><span class="text-uppercase"><%= data.date %> : </span></b>
+                <br />
+                Click on the squares to indicate when you slept. <code>CLICK + DRAG</code> to select multiple
+                squares at once, or <code>SHIFT + CLICK</code> on the squares to indicate you were "DOZING." The
+                system will remember your selections instantly.
+            </p>
+            <hr />
         </div>
     </div>
     <div class="row">
