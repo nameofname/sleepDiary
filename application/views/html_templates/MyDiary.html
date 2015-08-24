@@ -2,15 +2,17 @@
 
     <div class="row">
         <div class="col-xs-3">
-            <p>Total Time Slept : <%= data.timeSlept %></p>
-            <p>Total Time Dozing : <%= data.timeDozing %></p>
+            <small>Total Time Slept : <%= data.timeSlept %></small><br />
+            <small>Total Time Dozing : <%= data.timeDozing %></small>
+            <br /><br />
         </div>
         <div class="col-xs-3">
             <a href="/edit/<%= data.id %>"><i class="fa fa-pencil-square-o fa-2x"></i> Edit</a>
         </div>
     </div>
     <div class="row">
-        <div class="time-container">
+        <div class="col-xs-12">
+            <div class="time-container"></div>
         </div>
     </div>
     <div class="row">

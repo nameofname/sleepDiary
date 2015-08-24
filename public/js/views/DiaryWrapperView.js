@@ -99,6 +99,9 @@
                 // Add the day model to the collection :
                 this.collection.add(day);
                 this.render();
+                setTimeout(function () {
+                    document.location = '/edit/' + day.get('id');
+                }, 500);
 
             }.bind(this)).fail(function (jqxhr) {
                 var json = jqxhr.responseJSON;
