@@ -2,6 +2,7 @@
 
     <div class="row">
         <div class="col-xs-3">
+            <p class="lead"><%= data.date %></p>
             <small>Total Time Slept : <%= data.timeSlept %></small><br />
             <small>Total Time Dozing : <%= data.timeDozing %></small>
             <br /><br />
@@ -92,7 +93,7 @@
         <div class="col-xs-12">
             <p>
                 Edit your sleep times for <b><span class="text-uppercase"><%= data.date %> : </span></b>
-                <br />
+                <br /><br />
                 Click on the squares to indicate when you slept. <code>CLICK + DRAG</code> to select multiple
                 squares at once, or <code>SHIFT + CLICK</code> on the squares to indicate you were "DOZING." The
                 system will remember your selections instantly.
