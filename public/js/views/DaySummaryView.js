@@ -14,9 +14,10 @@
 
         render : function () {
             this.$el.append(this.template(
-                _.extend({
+                _.defaults({
                     timeSlept : this.getTimeTotalForState(enums.ASLEEP),
-                    timeDozing : this.getTimeTotalForState(enums.DOZING)
+                    timeDozing : this.getTimeTotalForState(enums.DOZING),
+                    date : this.model._formateDate()
                 }, this.model.toJSON())
             ));
 

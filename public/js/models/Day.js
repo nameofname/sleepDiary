@@ -15,7 +15,16 @@
             return  _.pick(this.toJSON(), function (val) {
                 return _.indexOf([enums.ASLEEP, enums.AWAKE, enums.DOZING], val) !== -1;
             });
+        },
+
+        _formateDate : function () {
+            var d = new Date(this.get('date'));
+            var arr = d.toUTCString().split(' ');
+            arr.pop();
+            arr.pop();
+            return arr.join(' ');
         }
+
     });
 
     app.Day.enums = enums = {

@@ -8,7 +8,6 @@ $js_files = array(
     '/public/js/models/User.js',
     '/public/js/models/Time.js',
     '/public/js/models/Day.js',
-    '/public/js/collections/Days.js',
     '/public/js/views/TimeView.js',
     '/public/js/views/UpdateDayView.js',
     '/public/js/pages/edit.js',
