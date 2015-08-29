@@ -27,32 +27,27 @@
 <script type="text/template" id="DiaryWrapper-template">
 
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-8">
             <p class="lead">Hi, you have reached your diary page.</p>
             <p>
                 From here you can view a summary of your recorded sleep times. You can also add new days to your
                 sleep diary. To create a new day record click on the "add another day" button at right.
             </p>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 error-container"></div>
-        <hr />
-    </div>
-    <div class="row">
-        <div class="col-xs-3">
-            <p class="lead">My records :</p>
-        </div>
-        <div class="col-xs-9 stats"><!-- average sleep time goes here... --></div>
-    </div>
-    <div class="row">
-        <div id="add" class="col-xs-12">
+        <div class="col-xs-4">
+            <div class="stats">
+                <!-- average sleep time goes here... -->
+            </div>
             <div class="pull-right">
                 <a href="#" class="btn btn-primary pull-right datepicker" data-date-format="yyyy-mm-dd">
                     Add another day <i class="fa fa-plus"></i>
                 </a>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 error-container"></div>
+        <hr />
     </div>
     <div class="row">
         <div class="col-xs-12">
