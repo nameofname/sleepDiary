@@ -8,10 +8,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => getenv(heroku_db_host),
-	'username' => getenv(heroku_db_user),
-	'password' => getenv(heroku_db_pw),
-	'database' => getenv(heroku_db_db),
+    'hostname' => getenv('heroku_db_host'),
+    'username' => getenv('heroku_db_user'),
+    'password' => getenv('heroku_db_pw'),
+    'database' => getenv('heroku_db_db'),
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
