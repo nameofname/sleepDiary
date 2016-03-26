@@ -17,6 +17,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 .idea/*
 
 application/config/configOverRides.php
-application/config/database.php
 
 .htaccess
