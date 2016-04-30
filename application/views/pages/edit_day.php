@@ -4,7 +4,7 @@ $js_files = array(
     '/public/js/libraries/bbc/BaseView.js',
     '/public/js/libraries/bbc/modules/AlertView.js',
     '/public/js/libraries/bootstrap-datepicker.js',
-    '/public/js/helpers/ShowError.js',
+    '/public/js/helpers/showError.js',
     '/public/js/models/User.js',
     '/public/js/models/Time.js',
     '/public/js/models/Day.js',
