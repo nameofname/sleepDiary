@@ -85,7 +85,10 @@ class Day extends Base_Model {
         return $query->row();
     }
 
-    public   function validate_post ($data) {
+    public function validate_post ($data) {
+        if (strtotime($data['date']) > time()) {
+            return 'cannot_create_future';
+        }
         $has_duplicates = $this->_find_duplicates($data);
         if ($has_duplicates) {
             return 'cannot_create_duplicates';

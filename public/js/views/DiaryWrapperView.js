@@ -103,7 +103,7 @@
 
             }.bind(this)).fail(function (jqxhr) {
                 var json = jqxhr.responseJSON;
-                var errCode = json && json.result ? json.result : null;
+                var errCode = json && (typeof json === 'string') ? json : null;
                 this.showError(errCode);
             }.bind(this));
         },

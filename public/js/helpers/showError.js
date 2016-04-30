@@ -6,7 +6,8 @@
 
     var messages = {
         default : "We're sorry, there was an error when trying to complete your request. Please try again.",
-        cannot_create_duplicates : "You have already created a record for this date. You may not create 2 records for the same day."
+        cannot_create_duplicates : "You have already created a record for this date. You may not create 2 records for the same day.",
+        cannot_create_future : "You cannot create a record for a date in the future."
     };
 
     app.helpers.showError = function (code) {
