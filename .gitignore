@@ -17,3 +17,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 .idea/*
 
 .htaccess
+error_log
