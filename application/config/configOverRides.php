@@ -3,5 +3,5 @@
  * Configuration over-rides.
  */
     
-$config['cookie_domain'] = 'local.sleep.com';
+$config['cookie_domain'] = 'freesleepdiary.com';
 $config['index_page'] = '/';
