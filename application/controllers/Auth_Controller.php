@@ -1,8 +1,6 @@
 <?php
 
-//use Libraries\Session;
 use helpers\SessionInstance;
-//use User_Model;
 require(APPPATH . 'core/Sleep_Controller.php');
 
 /**
